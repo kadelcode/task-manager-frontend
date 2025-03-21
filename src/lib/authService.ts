@@ -10,7 +10,7 @@ export interface User {
 };
 
 // Function to register a new user
-export const registerUser = async (data: { name: string; email: string; passwrod: string }): Promise<User> => {
+export const registerUser = async (data: { name: string; email: string; password: string }): Promise<User> => {
     // Sending a POST request to the "/auth/register" endpoint with user data
     const response = await api.post("/auth/register", data);
 
