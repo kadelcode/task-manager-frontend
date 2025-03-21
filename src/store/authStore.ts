@@ -2,6 +2,11 @@
 // `zustand` is a small, fast, and scalable state-management library for React.
 import { create } from "zustand";
 
+// Importing authentication service functions
+import { loginUser, registerUser, logoutUser } from "@/lib/authService";
+
+// Importing library for displaying toast notifications
+import toast from "react-hot-toast";
 
 // Import the 'setAuthToken' function from a local module.
 // This function is likely used to set an authentication token in the API client.
@@ -11,6 +16,11 @@ import { setAuthToken } from "@/lib/api";
 // Define an interface for the authentication state.
 // This interface specifies the shape of the state and the methods that will be available.
 interface AuthState {
+    user: { id: string; name: string; email: string } | null; // User object containing id, name, and email
+    login: (email: string, password: string) => Promise<void> // Login function
+    register: (name: string, email: string, password: string) => Promise<void>; // Register function
+    logout: () => void; // Logout function
+    
     token: string | null; // The authentication token, which can be a string or null
     setToken: (token: string | null) => void; // A method to set the authentication token.
 }
