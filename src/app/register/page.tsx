@@ -9,6 +9,7 @@ import { Loader2, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import zxcvbn from "zxcvbn"; // Import password strength checker
+import RegisterSkeleton from "@/components/skeletons/RegisterSkeleton";
 
 // Define form schema using Zod
 const registerSchema = z.object({
@@ -50,6 +51,7 @@ export default function RegisterPage() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState(0);
     const [passwordFeedback, setPasswordFeedback] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const {
         register,
@@ -74,6 +76,11 @@ export default function RegisterPage() {
     const passwordStrengthResult = zxcvbn(passwordValue);
     /*const passwordStrength = checkPasswordStrength(password);*/
 
+    // Simulate loading
+    useEffect(() => {
+        setTimeout(() => setLoading(false), 1500);
+    }, [])
+
     // Update password strength state
     useEffect(() => {
         setPasswordStrength(passwordStrengthResult.score);
@@ -86,104 +93,110 @@ export default function RegisterPage() {
 
     return (
         <section className="flex items-center h-screen">
-        <div className="w-96 px-6 mx-auto p-5 border rounded">
-            <h2 className="text-xl font-bold">Register</h2>
+            { loading ? (
+                <RegisterSkeleton />
+            ) : (
+                <div className="w-96 px-6 mx-auto p-5 border rounded">
+                    <h2 className="text-xl font-bold">Register</h2>
 
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-                <div className="">
-                    <input
-                      type="text"
-                      placeholder="Name"
-                      {...register("name")}
-                      className="border p-2 w-full mt-4 rounded-md"
-                    />
-                    {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
-                </div>
+                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+                        <div className="">
+                            <input
+                            type="text"
+                            placeholder="Name"
+                            {...register("name")}
+                            className="border p-2 w-full mt-4 rounded-md"
+                            />
+                            {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
+                        </div>
 
-                <div>
-                    <input
-                      type="email"
-                      placeholder="Email"
-                      {...register("email")}
-                      className="border p-2 w-full mt-3 rounded-md"
-                    />
-                    {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
-                </div>
+                        <div>
+                            <input
+                            type="email"
+                            placeholder="Email"
+                            {...register("email")}
+                            className="border p-2 w-full mt-3 rounded-md"
+                            />
+                            {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                        </div>
 
-                <div className="relative">
-                    <input
-                      type={ showPassword ? "text" : "password" }
-                      placeholder="Password"
-                      {...register("password")}
-                      className="border p-2 w-full mt-3 rounded-md"
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-3 top-6 text-gray-500"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                    {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
-                </div>
+                        <div className="relative">
+                            <input
+                            type={ showPassword ? "text" : "password" }
+                            placeholder="Password"
+                            {...register("password")}
+                            className="border p-2 w-full mt-3 rounded-md"
+                            />
+                            <button
+                            type="button"
+                            className="absolute right-3 top-6 text-gray-500"
+                            onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                            {errors.password && <p className="text-red-500 text-sm">{errors.password.message}</p>}
+                        </div>
 
-                {/* Password Strength Meter */}
-                {passwordValue && (
-                    <div className="mt-2">
-                        <div
-                          className="h-1 rounded-full"
-                          style={{
-                            width: `${(passwordStrength + 1) * 20}%`,
-                            backgroundColor: strengthColors[passwordStrength],
-                          }}
-                        />
-                        <p className="text-sm text-gray-600 mt-1">
-                            Strength:{" "}
-                            <span style={{ color: strengthColors[passwordStrength] }}>
-                                {strengthLabels[passwordStrength]}
-                            </span>
-                        </p>
-                        {passwordFeedback && <p className="text-xs text-gray-500">{passwordFeedback}</p>}
+                        {/* Password Strength Meter */}
+                        {passwordValue && (
+                            <div className="mt-2">
+                                <div
+                                className="h-1 rounded-full"
+                                style={{
+                                    width: `${(passwordStrength + 1) * 20}%`,
+                                    backgroundColor: strengthColors[passwordStrength],
+                                }}
+                                />
+                                <p className="text-sm text-gray-600 mt-1">
+                                    Strength:{" "}
+                                    <span style={{ color: strengthColors[passwordStrength] }}>
+                                        {strengthLabels[passwordStrength]}
+                                    </span>
+                                </p>
+                                {passwordFeedback && <p className="text-xs text-gray-500">{passwordFeedback}</p>}
+                            </div>
+                        )}
+
+                        <div className="relative">
+                            <input
+                            type={ showConfirmPassword ? "text" : "password" }
+                            placeholder="Confirm Password"
+                            {...register("confirmPassword")}
+                            className="border p-2 w-full mt-3 rounded-md"
+                            />
+                            <button
+                            type="button"
+                            className="absolute right-3 top-6 text-gray-500"
+                            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                            >
+                                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
+                            {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>}
+                        </div>
+
+                        <button type="submit"
+                        className={`bg-green-400 hover:bg-green-500 text-white px-4 py-2 w-full mt-5 rounded-md ${
+                            isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+                        }`}
+                        disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 
+                            <div className="flex items-center justify-center">
+                                <Loader2 className="animate-spin mr-2" />Registering...
+                            </div> : 
+                            "Register" 
+                            }
+                        </button>
+                    </form>
+
+                    {/* Link to Login */}
+                    <div className="text-center mt-5">
+                        <span>Already have an account? <Link className="text-blue-500 hover:underline" href="/login">Login</Link></span>
                     </div>
-                )}
-
-                <div className="relative">
-                    <input
-                      type={ showConfirmPassword ? "text" : "password" }
-                      placeholder="Confirm Password"
-                      {...register("confirmPassword")}
-                      className="border p-2 w-full mt-3 rounded-md"
-                    />
-                    <button
-                      type="button"
-                      className="absolute right-3 top-6 text-gray-500"
-                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    >
-                        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                    {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>}
                 </div>
-
-                <button type="submit"
-                  className={`bg-green-400 hover:bg-green-500 text-white px-4 py-2 w-full mt-5 rounded-md ${
-                    isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
-                  }`}
-                  disabled={isSubmitting}
-                >
-                    {isSubmitting ? 
-                      <div className="flex items-center justify-center">
-                        <Loader2 className="animate-spin mr-2" />Registering...
-                      </div> : 
-                      "Register" 
-                    }
-                </button>
-            </form>
-
-            {/* Link to Login */}
-            <div className="text-center mt-5">
-                <span>Already have an account? <Link className="text-blue-500 hover:underline" href="/login">Login</Link></span>
-            </div>
-        </div>
+            )}
+        
         </section>
+        
     )
 }
