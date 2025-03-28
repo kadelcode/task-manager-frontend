@@ -41,7 +41,7 @@ export default function LoginPage() {
   // Render the login form
   return (
     <section className="flex items-center h-screen">
-    <div className="min-w-md mx-auto p-5 border rounded">
+    <div className="w-96 mx-auto p-5 border rounded">
       <h2 className="text-xl font-bold">Login To Your Account</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
@@ -78,8 +78,10 @@ export default function LoginPage() {
 
         <button
           type="submit"
+          className={`bg-green-400 hover:bg-green-500 text-white px-4 py-2 mt-5 w-full rounded-md 
+            ${isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+          `}
           disabled={isSubmitting} // Disable button during submission
-          className="bg-green-400 hover:bg-green-500 cursor-pointer text-white px-4 py-2 mt-5 w-full rounded-md"
         >
           {/* Display loading text during submission */}
           {isSubmitting ? 
