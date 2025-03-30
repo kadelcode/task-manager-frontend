@@ -60,17 +60,33 @@ const testimonials = [
 export default function Testimonials() {
     return (
         <section className="py-20 bg-gray-100 text-center">
-            <h2 className="text-3xl font-bold">
+            <motion.h2 
+              className="text-3xl font-bold text-gray-800"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              
+            >
                 What Our Users Say
-            </h2>
-            <p className="text-gray-600 mt-3">
+            </motion.h2>
+            <motion.p 
+              className="text-gray-600 mt-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
                 See how our app has improved productivity
-            </p>
+            </motion.p>
             
             <Carousel className="w-96 md:w-xl lg:w-2xl mx-auto mt-8">
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
                         <CarouselItem key={index} className="p-4">
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.9 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              transition={{ duration: 0.5, delay: index * 0.2 }}
+                            >
                             <Card className="shadow-lg rounded-xl p-6 bg-white border-l-0 border-t-0 border-r-2 border-b-0 border-green-400">
                                 <CardContent className="flex flex-col items-center">
                                     <Avatar className="w-16 h-16">
@@ -82,6 +98,7 @@ export default function Testimonials() {
                                     <p className="text-gray-500">{testimonial.role}</p>
                                 </CardContent>
                             </Card>
+                            </motion.div>
                         </CarouselItem>
                     ))}
                 </CarouselContent>
