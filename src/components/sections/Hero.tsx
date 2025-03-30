@@ -8,7 +8,7 @@ import { ArrowRight } from "lucide-react";
 export function Hero() {
     return (
         <section 
-          className="relative flex flex-col items-center justify-center text-center py-20 px-5 bg-gradient-to-b from-green-100 to-green-200"
+          className="relative flex flex-col -z-30 items-center justify-center text-center py-20 px-5 bg-gradient-to-b from-green-100 to-green-200"
         >   {/* Animated Heading */}
             <motion.h1
               className="text-4xl sm:text-5xl font-bold mb-4 text-gray-800"

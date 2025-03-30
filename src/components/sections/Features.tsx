@@ -31,7 +31,7 @@ const features: Feature[] = [
 
 export default function Features() {
     return (
-        <section className="py-20 px-6 bg-gray-100">
+        <section id="features" className="py-20 px-6 bg-gray-100">
             <div className="max-w-5xl mx-auto text-center">
                 <h2 className="text-3xl font-bold text-gray-900">
                     Powerful Features

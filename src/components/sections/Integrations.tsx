@@ -6,7 +6,7 @@ const tools = [
 
 export default function Integrations() {
     return (
-        <section className="py-20 bg-white text-center">
+        <section id="integrations" className="py-20 bg-white text-center">
             <h2 className="text-3xl font-bold">Seamless Integrations</h2>
             <p className="text-gray-600 mt-3">Works with your favorite tools.</p>
             <div className="flex justify-center gap-6 mt-6">

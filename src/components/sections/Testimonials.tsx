@@ -59,7 +59,7 @@ const testimonials = [
 
 export default function Testimonials() {
     return (
-        <section className="py-20 bg-gray-100 text-center">
+        <section id="testimonials" className="py-20 bg-gray-100 text-center">
             <motion.h2 
               className="text-3xl font-bold text-gray-800"
               initial={{ opacity: 0, y: -20 }}
@@ -78,7 +78,7 @@ export default function Testimonials() {
                 See how our app has improved productivity
             </motion.p>
             
-            <Carousel className="w-96 md:w-xl lg:w-2xl mx-auto mt-8">
+            <Carousel className="w-96 md:w-xl lg:w-2xl mx-auto mt-8 z-10">
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
                         <CarouselItem key={index} className="p-4">
