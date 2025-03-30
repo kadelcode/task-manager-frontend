@@ -27,13 +27,15 @@ export default function Header() {
                 </button>
             </nav>
 
+            {/* Overlay when menu is open */}
+            {isOpen && <div className="fixed inset-0 bg-black/50 z-40" onClick={() => setIsOpen(false)}></div>}
+
             {isOpen && (
                 <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className="md:hidden fixed top-16 left-0 w-full bg-white shadow-md py-4 z-50"
                 >
-                    <div className="inset-0 bg-green-300" />
                     <div className="flex flex-col space-y-4 items-center">
                         <Link href="#features" className="hover:text-[#05df72]" onClick={() => setIsOpen(false)}>Features</Link>
                         <Link href="#integrations" className="hover:text-[#05df72]" onClick={() => setIsOpen(false)}>Integrations</Link>
