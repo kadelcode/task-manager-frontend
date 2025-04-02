@@ -17,8 +17,10 @@ export const setAuthToken = (token: string | null) => {
     if (token) {
         // If a token is provided, set the Authorization header with the token
         api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        localStorage.setItem("authToken", token);
     } else {
         // If no token is provided, remove the Authorization header
         delete api.defaults.headers.common["Authorization"];
+        localStorage.removeItem("authToken");
     }
-}
+};
