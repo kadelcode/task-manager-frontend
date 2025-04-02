@@ -1,15 +1,22 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
+import { useRouter, usePathname } from "next/navigation";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuthStore } from "@/store/authStore";
+import useAuthStore from "@/store/authStore";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useTransition } from "react";
 import zxcvbn from "zxcvbn"; // Import password strength checker
 import RegisterSkeleton from "@/components/skeletons/RegisterSkeleton";
+import { useNavigationStore } from "@/store/useNavigationStore";
+
+interface RegisterFormInputs {
+    name: string;
+    email: string;
+    password: string;
+}
 
 // Define form schema using Zod
 const registerSchema = z.object({
@@ -51,7 +58,12 @@ export default function RegisterPage() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState(0);
     const [passwordFeedback, setPasswordFeedback] = useState("");
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [isPending, startTransition] = useTransition();
+    //const isNavigating = useNavigationStore((state) => state.isNavigating);
+
+    const pathname = usePathname();
+    const [lastPath, setLastPath] = useState(pathname);
 
     const {
         register,
@@ -62,10 +74,11 @@ export default function RegisterPage() {
         resolver: zodResolver(registerSchema),
     });
 
-    const onSubmit = async (data: { name: string; email: string; password: string }) => {
+    const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
         try {
             await registerUser(data.name, data.email, data.password);
-            router.push("/dashboard");
+            // login(data.email, data.password); // Call the login function with email and password
+            router.push("/login");
         } catch (error) {
             console.error("Registration failed", error);
         }
@@ -78,8 +91,15 @@ export default function RegisterPage() {
 
     // Simulate loading
     useEffect(() => {
-        setTimeout(() => setLoading(false), 1500);
-    }, [])
+        if (pathname !== lastPath) {
+            if (isPending) {
+                setLoading(true);
+            } else {
+                setLoading(false);
+            }
+        }
+        setLastPath(pathname);
+    }, [pathname, isPending, lastPath]);
 
     // Update password strength state
     useEffect(() => {
