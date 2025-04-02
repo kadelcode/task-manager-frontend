@@ -1,39 +1,58 @@
-// Import the 'create' function from the 'zustand' library.
-// `zustand` is a small, fast, and scalable state-management library for React.
 import { create } from "zustand";
-
-// Importing authentication service functions
-import { loginUser, registerUser, logoutUser } from "@/lib/authService";
-
-// Importing library for displaying toast notifications
 import toast from "react-hot-toast";
+import authService from "@/services/authService"; // Ensure this exists
 
-// Import the 'setAuthToken' function from a local module.
-// This function is likely used to set an authentication token in the API client.
-import { setAuthToken } from "@/lib/api";
-
-
-// Define an interface for the authentication state.
-// This interface specifies the shape of the state and the methods that will be available.
 interface AuthState {
-    user: { id: string; name: string; email: string } | null; // User object containing id, name, and email
-    login: (email: string, password: string) => Promise<void> // Login function
-    register: (name: string, email: string, password: string) => Promise<void>; // Register function
-    logout: () => void; // Logout function
-    
-    token: string | null; // The authentication token, which can be a string or null
-    setToken: (token: string | null) => void; // A method to set the authentication token.
+  user: { id: string; name: string; email: string } | null;
+  token: string | null;
+  isAuthenticated: boolean;
+  loading: boolean;
+  login: (email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<void>; // ✅ Added register
+  logout: () => void;
 }
 
+const useAuthStore = create<AuthState>((set) => ({
+  user: JSON.parse(localStorage.getItem("user") || "null"), // Persist user
+  token: localStorage.getItem("token"),
+  isAuthenticated: !!localStorage.getItem("user"),
+  loading: false, // Add loading state
 
-// Create a zustand store for managing authentication state.
-// The 'create' function takes a function that returns the initial state and any methods to update the state.
-export const useAuthStore = create<AuthState>((set) => ({
-    token: null, // Initialize the token as null
+  login: async (email, password) => {
+    set({ loading: true });
+    try {
+      const { user, token } = await authService.login(email, password); // Ensure `authService` returns token
+      set({ user, token, isAuthenticated: true, loading: false });
+      
+      localStorage.setItem("user", JSON.stringify(user)); // Store user in localStorage
+      localStorage.setItem("token", token); // Store JWT token
 
-    // Define the 'setToken' method to update the token in the state.
-    setToken: (token) => {
-        setAuthToken(token); // Call the 'setAuthToken' function to set the token in the API client
-        set({ token }); // Update the state with the new token.
-    },
-}))
+      toast.success("Login successful!");
+    } catch (error: any) {
+      set({ loading: false });
+      toast.error(error?.response?.data?.message || "Login failed.");
+    }
+  },
+
+  register: async (name, email, password) => { // ✅ Ensure register is implemented
+    set({ loading: true });
+    try {
+      await authService.register(name, email, password);
+      set({ loading: false });
+      toast.success("Registration successful! Please login.");
+    } catch (error: any) {
+      set({ loading: false });
+      toast.error(error?.response?.data?.message || "Registration failed.");
+    }
+  },
+
+  logout: () => {
+    authService.logout();
+    localStorage.removeItem("user"); // Remove user from localStorage
+    localStorage.removeItem("token");
+    set({ user: null, token: null, isAuthenticated: false });
+    toast.success("Logged out successfully!");
+  },
+}));
+
+export default useAuthStore;
