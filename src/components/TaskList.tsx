@@ -1,7 +1,10 @@
-import React, { useState, Ref } from "react";
+import React, { useState, Ref, useEffect } from "react";
 import { useDrop, useDrag, DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Card } from "./ui/card";
+import axios from "axios";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Define the Task interface
 interface Task {
@@ -23,15 +26,23 @@ interface TaskCardProps {
 }
 
 // Define a list of tasks with their initial statuses
-const tasks = [
+/*const tasks = [
     { id: 1, title: "Design the UI", status: "To Do" },
     { id: 2, title: "Develop API", status: "In Progress" },
-];
+];*/
 
 // Main TaskList component
 const TaskList = () => {
     // State to manage the list of tasks
-    const [taskList, setTaskList] = useState<Task[]>(tasks);
+    const [taskList, setTaskList] = useState<Task[]>([]);
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+            const response = await axios.get(API_URL + '/tasks');
+            setTaskList(response.data)
+        };
+        fetchTasks();
+    }, []);
 
     return (
         // Layout for the task colums
@@ -54,7 +65,8 @@ const TaskColumn: React.FC<TaskColumnProps> = ({ status, tasks, setTasks }) => {
     });
 
     // Function to move a task to a new status
-    const moveTask = (id: number, newStatus: string) => {
+    const moveTask = async (id: number, newStatus: string) => {
+        await axios.put(`http://localhost:5000/tasks/${id}`, { status: newStatus });
         setTasks((prev) =>
             prev.map((task) => (task.id === id ? { ...task, status: newStatus } : task ))
         );
@@ -62,7 +74,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({ status, tasks, setTasks }) => {
 
     return (
         // Container for the task column with drop functionality
-        <div ref={drop as unknown as Ref<HTMLDivElement>} className="p-4 bg-gray-200 rounded-lg min-h-[200px]">
+        <div ref={drop as unknown as Ref<HTMLDivElement>} className="p-4 h-screen bg-gray-200 rounded-lg min-h-[200px]">
             <h3 className="font-bold">{status}</h3>
 
             {/* Filter and map tasks to display only those with the current status */}

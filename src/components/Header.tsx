@@ -1,3 +1,7 @@
+/**
+ * Navigation Header for Landing Page
+ */
+
 "use client";
 
 import { Menu, X } from "lucide-react";
@@ -8,7 +12,7 @@ import { useState } from "react";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
-
+    
     return (
         <div>
             <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
@@ -21,7 +25,9 @@ export default function Header() {
                     <Link href="#testimonials" className="hover:text-green-500">Testimonials</Link>
                     <Link href="#faq" className="hover:text-green-500">FAQ</Link>
                 </div>
-                <Button className="hidden md:block text-white">Get Started</Button>
+                <Link href="/dashboard">
+                 <Button className="hidden md:block text-white">Get Started</Button>
+                </Link>
                 <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
@@ -41,7 +47,10 @@ export default function Header() {
                         <Link href="#integrations" className="hover:text-[#05df72]" onClick={() => setIsOpen(false)}>Integrations</Link>
                         <Link href="#testimonials" className="hover:text-[#05df72]" onClick={() => setIsOpen(false)}>Testimonials</Link>
                         <Link href="#faq" className="hover:text-[#05df72]" onClick={() => setIsOpen(false)}>FAQ</Link>
-                        <Button className="bg-[#05df72] hover:bg-green-500 text-white cursor-pointer">Get Started</Button>
+                        
+                        <Link href="/dashboard">
+                            <Button className="bg-[#05df72] hover:bg-green-500 text-white cursor-pointer">Get Started</Button>
+                        </Link>
                     </div>
                 </motion.div>
             )}
