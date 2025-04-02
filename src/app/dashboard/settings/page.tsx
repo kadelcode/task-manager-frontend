@@ -11,7 +11,7 @@ export default function SettingsPage() {
     // Simulate a loading delay
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 20000); // Adjust delay as needed
+    }, 1500); // Adjust delay as needed
 
     // Cleanup the timer on component unmount
     return () => clearTimeout(timer);
@@ -26,6 +26,101 @@ export default function SettingsPage() {
     <div className="p-6">
       <h1 className="text-2xl font-bold mb-4">Settings</h1>
       <p>Your settings code logic goes here</p>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
+      <div>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+      Fugit nobis temporibus odit reiciendis hic unde voluptate alias eveniet 
+      corrupti ipsam similique cupiditate dolorem rerum officiis, delectus quas expedita, earum iste?
+      </div>
       {/*<ThemeToggle />*/}
     </div>
   );

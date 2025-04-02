@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import withAuth from "@/hoc/withAuth";
+// import withAuth from "@/hoc/withAuth";
 
 function Dashboard() {
   return (
@@ -30,4 +30,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
-// export default withAuth(Dashboard);
+//export default withAuth(Dashboard);
