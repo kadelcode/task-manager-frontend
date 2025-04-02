@@ -1,16 +1,22 @@
 "use client";
 
-import { useForm } from "react-hook-form"; // Hook for managing form state and validation
+import { useForm, SubmitHandler } from "react-hook-form"; // Hook for managing form state and validation
 import { z } from "zod"; // Library for schema definition and validation
 import { zodResolver } from "@hookform/resolvers/zod"; // Integration between react-hook-form and Zod
-import { useAuthStore } from "@/store/authStore"; // Custom hook for authentication state management
+import useAuthStore from "@/store/authStore"; // Custom hook for authentication state management
 import { useRouter } from "next/navigation"; // Hook for navigation in Next.js
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 
 import LoginSkeleton from "@/components/skeletons/LoginSkeleton";
+
+
+interface LoginFormInputs {
+  email: string;
+  password: string;
+}
 
 // Define Zod schema for login form validation
 const loginSchema = z.object({
@@ -20,7 +26,7 @@ const loginSchema = z.object({
 
 // Define the LoginPage component
 export default function LoginPage() {
-  const { login } = useAuthStore(); // Get the login function from the auth store
+  const { login, isAuthenticated } = useAuthStore();
   const router = useRouter(); // Initialize the router for navigation
   const [showPassword, setShowPassword] = useState(false);
   const [loading, isLoading] = useState(true);
@@ -36,10 +42,16 @@ export default function LoginPage() {
 
 
   // Define the onSubmit function for form submission
-  const onSubmit = async (data: { email: string; password: string }) => {
+  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     await login(data.email, data.password); // Call the login function with email and password
-    router.push("/dashboard"); // Navigate to the dashboard page after successful login
+    //router.push("/dashboard"); // Navigate to the dashboard page after successful login
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/dashboard"); // Redirect logged-in users
+    }
+  }, [isAuthenticated, router]);
 
   // Simulate loading time
   useEffect(() => {
