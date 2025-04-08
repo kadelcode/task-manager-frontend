@@ -18,9 +18,11 @@ export default function SettingsPage() {
   }, []);
 
   if (isLoading) {
-    return <div className="flex items-center justify-center h-[calc(100vh-4rem)]">
+    return (
+    <div className="flex items-center justify-center h-[calc(100vh-4rem)]">
       <Loader2 size={30} className="text-green-400 animate-spin"></Loader2>
     </div>
+    )
   }
   return (
     <div className="p-6">
