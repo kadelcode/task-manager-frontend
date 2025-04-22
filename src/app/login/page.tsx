@@ -64,10 +64,11 @@ export default function LoginPage() {
         { loading ? (
             <LoginSkeleton />
         ) : (
-            <div className="w-96 mx-auto p-5 border rounded">
+            <div
+              style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }} 
+              className="w-96 mx-auto p-5 rounded shadow-2xl">
             <h2 className="text-xl font-bold">Login To Your Account</h2>
             <form 
-              style={{ boxShadow: '0 4px 6px -4px rgba(0, 0, 0, 0.1)' }}
               onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <input
