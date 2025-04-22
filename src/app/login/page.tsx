@@ -72,10 +72,10 @@ export default function LoginPage() {
                     type="email"
                     placeholder="Email"
                     {...register("email")} // Register the email input field
-                    className={`bg-white focus:outline-0 focus:border-green-400 border rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.email ? " border-red-500 focus:outline-0 focus:border-red-500" : ""}`}
+                    className={`bg-white focus:outline-0 focus:border-[#05df72] border rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.email ? " border-red-500 focus:outline-0 focus:border-red-500" : ""}`}
                     />
                     {/* Display email error message */}
-                    {errors.email && <small className="text-red-500">{errors.email.message}</small>}
+                    {errors.email && <small className="text-[#fb2c36]">{errors.email.message}</small>}
                 </div>
 
                 <div className="relative">
@@ -83,25 +83,25 @@ export default function LoginPage() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     {...register("password")} // Register the password input field
-                    className={`bg-white focus:outline-0 focus:border-green-400 border rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.password ? "focus:outline-0 border-red-500 focus:border-red-500": ""}`}
+                    className={`bg-white focus:outline-0 focus:border-[#05df72] border rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.password ? "focus:outline-0 border-red-500 focus:border-red-500": ""}`}
                     />
                     <button
                     type="button" // Prevents triggering validation/submission
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-8 text-gray-500"
+                    className="absolute right-3 top-8 text-[#6a7282]"
                     >
                         {showPassword ? <EyeOff width={20} height={20} /> : <Eye width={20} height={20} />}
                     </button>
                     {/* Display password error message */}
                     {errors.password && (
-                    <small className="text-red-500">{errors.password.message}</small>
+                    <small className="text-[#fb2c36]">{errors.password.message}</small>
                     )}
                 </div>
                 
 
                 <button
                 type="submit"
-                className={`bg-green-400 hover:bg-green-500 text-white px-4 py-2 mt-5 w-full rounded-md 
+                className={`bg-[#05df72] hover:bg-[#00c951] text-white px-4 py-2 mt-5 w-full rounded-md 
                     ${isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
                 `}
                 disabled={isSubmitting} // Disable button during submission
@@ -119,14 +119,14 @@ export default function LoginPage() {
 
             {/* Forgot Password Link */}
             <div className="mt-3 text-center">
-                <a href="/forgot-password" className="text-blue-500 hover:underline">
+                <a href="/forgot-password" className="text-[#2b7fff] hover:underline">
                 Forgot Password?
                 </a>
             </div>
 
             {/* Link to Register Div */}
             <div className="text-center mt-5">
-                    <span>Don&apos;t have an account? <Link className="text-blue-500 hover:underline" href="/register">Register</Link></span>
+                    <span>Don&apos;t have an account? <Link className="text-[#2b7fff] hover:underline" href="/register">Register</Link></span>
             </div>
         </div>
         )}
