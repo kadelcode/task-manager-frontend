@@ -4,7 +4,13 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 
-const withAuth = (WrappedComponent: React.FC) => {
+// Define an interface of the props
+interface ProtectedComponentProps {
+  // Define the expected props here
+  user: string;
+}
+
+const withAuth = (WrappedComponent: React.FC<ProtectedComponentProps>) => {
   return function ProtectedComponent(props: any) {
     const { isAuthenticated } = useAuth();
     const router = useRouter();

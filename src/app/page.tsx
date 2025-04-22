@@ -10,7 +10,6 @@ import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
 import Support from "@/components/sections/Support";
 
-metadata;
 
 export default function Home() {
   return (

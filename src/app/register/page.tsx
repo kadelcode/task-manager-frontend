@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useState, useEffect, useTransition } from "react";
 import zxcvbn from "zxcvbn"; // Import password strength checker
 import RegisterSkeleton from "@/components/skeletons/RegisterSkeleton";
-import { useNavigationStore } from "@/store/useNavigationStore";
+//import { useNavigationStore } from "@/store/useNavigationStore";
 
 interface RegisterFormInputs {
     name: string;
@@ -59,7 +59,7 @@ export default function RegisterPage() {
     const [passwordStrength, setPasswordStrength] = useState(0);
     const [passwordFeedback, setPasswordFeedback] = useState("");
     const [loading, setLoading] = useState(false);
-    const [isPending, startTransition] = useTransition();
+    const [isPending] = useTransition();
     //const isNavigating = useNavigationStore((state) => state.isNavigating);
 
     const pathname = usePathname();
@@ -105,7 +105,7 @@ export default function RegisterPage() {
     useEffect(() => {
         setPasswordStrength(passwordStrengthResult.score);
         setPasswordFeedback(passwordStrengthResult.feedback.suggestions.join(" "));
-    }, [passwordValue]);
+    }, [passwordValue, passwordStrengthResult]);
 
     // Password strength labels
     const strengthLabels = ["Very Weak", "Weak", "Fair", "Good", "Strong"];

@@ -28,9 +28,24 @@ const useAuthStore = create<AuthState>((set) => ({
       localStorage.setItem("token", token); // Store JWT token
 
       toast.success("Login successful!");
-    } catch (error: any) {
+    } catch (error: unknown) {
+      // Initialize a default error message
+      let errorMessage = "Something went wrong.";
+
+      // Check if the error is an object and not null
+      if (typeof error === "object" && error !== null && "response" in error) {
+        // Type assertion: treat the error as an object with an optional 'response' property
+        const err = error as { response?: { data?: { message?: string } } };
+
+        // Update the error message if a more specific one is available in the response
+        errorMessage = err.response?.data?.message || errorMessage;
+      }
+
+      // Update the state to indicate that loading has finished
       set({ loading: false });
-      toast.error(error?.response?.data?.message || "Login failed.");
+
+      // Display the error message using a toast nofication
+      toast.error(errorMessage);
     }
   },
 
@@ -40,9 +55,15 @@ const useAuthStore = create<AuthState>((set) => ({
       await authService.register(name, email, password);
       set({ loading: false });
       toast.success("Registration successful! Please login.");
-    } catch (error: any) {
+    } catch (error: unknown) {
+      let errorMessage = "Something went wrong.";
+
+      if (typeof error === "object" && error !== null && "response" in error) {
+        const err = error as { response?: { data?: { message?: string } } };
+        errorMessage = err.response?.data?.message || errorMessage;
+      }
       set({ loading: false });
-      toast.error(error?.response?.data?.message || "Registration failed.");
+      toast.error(errorMessage);
     }
   },
 

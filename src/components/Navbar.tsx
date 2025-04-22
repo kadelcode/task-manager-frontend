@@ -1,7 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { Bell, Plus, Search, UserCircle, X, Loader2 } from "lucide-react";
+import { Bell, Plus, UserCircle, X, Loader2 } from "lucide-react";
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,11 +11,11 @@ import useAuthStore from "@/store/authStore";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Navbar() {
-    const [search, setSearch] = useState("");
+    // const [search, setSearch] = useState("");
     const [isModelOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { user, isAuthenticated, logout } = useAuthStore();
+    const { user, isAuthenticated } = useAuthStore();
 
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
@@ -29,10 +29,11 @@ export default function Navbar() {
         };
 
         try {
-            const response = await axios.post(API_URL + "/tasks", formData);
+            // const response = await axios.post(API_URL + "/tasks", formData);
             toast.success('Task added successfully!');
             setIsModalOpen(false);
         } catch (error) {
+            console.log(error)
             toast.error('Error adding task. Please try again.');
         } finally {
             setIsLoading(false);

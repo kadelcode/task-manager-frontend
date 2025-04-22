@@ -29,7 +29,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
+  //const pathname = usePathname();
   const setNavigating = useNavigationStore((state) => state.setNavigating);
 
   useEffect(() => {

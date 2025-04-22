@@ -93,7 +93,7 @@ export default function Testimonials() {
                                         <AvatarImage src={testimonial.image} alt={testimonial.name} />
                                         <AvatarFallback className="font-bold">{testimonial.name[0]}</AvatarFallback>
                                     </Avatar>
-                                    <p className="text-gray-700 text-lg mt-4">"{testimonial.text}"</p>
+                                    <p className="text-gray-700 text-lg mt-4">&quot;{testimonial.text}&quot;</p>
                                     <h3 className="font-semibold mt-4">{testimonial.name}</h3>
                                     <p className="text-gray-500">{testimonial.role}</p>
                                 </CardContent>
