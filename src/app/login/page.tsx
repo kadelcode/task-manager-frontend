@@ -65,8 +65,8 @@ export default function LoginPage() {
             <LoginSkeleton />
         ) : (
             <div
-              style={{ boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }} 
-              className="w-96 mx-auto p-5 rounded shadow-2xl">
+              style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', border: '1px solid black' }} 
+              className="w-96 mx-auto p-5 rounded shadow-md">
             <h2 className="text-xl font-bold">Login To Your Account</h2>
             <form 
               onSubmit={handleSubmit(onSubmit)}>
@@ -74,7 +74,7 @@ export default function LoginPage() {
                     <input
                     type="email"
                     placeholder="Email"
-                    style={{ borderColor: 'yellow'}}
+                    style={{ border: `${errors.password ? '1px solid red' : '1px solid black'}`}}
                     {...register("email")} // Register the email input field
                     className={`bg-white focus:outline-0 focus:border-[#05df72] border border-[#99a1af] rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.email ? " border-[#fb2c36] focus:outline-0 focus:border-[#fb2c36]" : ""}`}
                     />
@@ -86,7 +86,7 @@ export default function LoginPage() {
                     <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
-                    style={{ border: '1px solid black'}}
+                    style={{ border: `${errors.password ? '1px solid red' : '1px solid black'}`}}
                     {...register("password")} // Register the password input field
                     className={`bg-white focus:outline-0 focus:border-[#05df72] border border-[#99a1af] rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.password ? "focus:outline-0 border-red-500 focus:border-red-500": ""}`}
                     />
