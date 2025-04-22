@@ -6,9 +6,9 @@ const tools = [
 
 export default function Integrations() {
     return (
-        <section id="integrations" className="py-20 bg-white text-center">
+        <section id="integrations" className="py-20 bg-[#fff] text-center">
             <h2 className="text-3xl font-bold">Seamless Integrations</h2>
-            <p className="text-gray-600 mt-3">Works with your favorite tools.</p>
+            <p className="text-[#4a5565] mt-3">Works with your favorite tools.</p>
             <div className="flex justify-center gap-6 mt-6">
                 {tools.map((tool, index) => (
                     <img

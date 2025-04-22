@@ -59,9 +59,9 @@ const testimonials = [
 
 export default function Testimonials() {
     return (
-        <section id="testimonials" className="py-20 bg-gray-100 text-center">
+        <section id="testimonials" className="py-20 bg-[#f3f4f6] text-center">
             <motion.h2 
-              className="text-3xl font-bold text-gray-800"
+              className="text-3xl font-bold text-[#000]"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -70,7 +70,7 @@ export default function Testimonials() {
                 What Our Users Say
             </motion.h2>
             <motion.p 
-              className="text-gray-600 mt-3"
+              className="text-[#4a5565] mt-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -87,15 +87,17 @@ export default function Testimonials() {
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ duration: 0.5, delay: index * 0.2 }}
                             >
-                            <Card className="shadow-lg rounded-xl p-6 bg-white border-l-0 border-t-0 border-r-2 border-b-0 border-green-400">
+                            <Card 
+                              style={{ boxShadow: '0 4px 6px -4px rgba(0, 0, 0, 0.1)' }}
+                              className="shadow-lg rounded-xl p-6 bg-white border-l-0 border-t-0 border-r-2 border-b-0 border-[#05df72]">
                                 <CardContent className="flex flex-col items-center">
                                     <Avatar className="w-16 h-16">
                                         <AvatarImage src={testimonial.image} alt={testimonial.name} />
                                         <AvatarFallback className="font-bold">{testimonial.name[0]}</AvatarFallback>
                                     </Avatar>
-                                    <p className="text-gray-700 text-lg mt-4">&quot;{testimonial.text}&quot;</p>
+                                    <p className="text-[#364153] text-lg mt-4">&quot;{testimonial.text}&quot;</p>
                                     <h3 className="font-semibold mt-4">{testimonial.name}</h3>
-                                    <p className="text-gray-500">{testimonial.role}</p>
+                                    <p className="text-[#6a7282]">{testimonial.role}</p>
                                 </CardContent>
                             </Card>
                             </motion.div>
