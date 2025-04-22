@@ -72,7 +72,7 @@ export default function LoginPage() {
                     type="email"
                     placeholder="Email"
                     {...register("email")} // Register the email input field
-                    className={`bg-white focus:outline-0 focus:border-[#05df72] border rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.email ? " border-red-500 focus:outline-0 focus:border-red-500" : ""}`}
+                    className={`bg-white focus:outline-0 focus:border-[#05df72] border border-[#99a1af] rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.email ? " border-[#fb2c36] focus:outline-0 focus:border-[#fb2c36]" : ""}`}
                     />
                     {/* Display email error message */}
                     {errors.email && <small className="text-[#fb2c36]">{errors.email.message}</small>}
@@ -83,7 +83,7 @@ export default function LoginPage() {
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
                     {...register("password")} // Register the password input field
-                    className={`bg-white focus:outline-0 focus:border-[#05df72] border rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.password ? "focus:outline-0 border-red-500 focus:border-red-500": ""}`}
+                    className={`bg-white focus:outline-0 focus:border-[#05df72] border border-[#99a1af] rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.password ? "focus:outline-0 border-red-500 focus:border-red-500": ""}`}
                     />
                     <button
                     type="button" // Prevents triggering validation/submission
