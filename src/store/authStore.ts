@@ -12,10 +12,25 @@ interface AuthState {
   logout: () => void;
 }
 
+const getInitialUser = () => {
+  if (typeof window !== "undefined") {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  }
+  return null;
+};
+
+const getInitialToken = () => {
+  if (typeof window !== "undefined") {
+    return localStorage.getItem("token");
+  }
+  return null;
+};
+
 const useAuthStore = create<AuthState>((set) => ({
-  user: JSON.parse(localStorage.getItem("user") || "null"), // Persist user
-  token: localStorage.getItem("token"),
-  isAuthenticated: !!localStorage.getItem("user"),
+  user: getInitialUser(), // Persist user
+  token: getInitialToken(),
+  isAuthenticated: !!getInitialUser(),
   loading: false, // Add loading state
 
   login: async (email, password) => {
@@ -24,8 +39,10 @@ const useAuthStore = create<AuthState>((set) => ({
       const { user, token } = await authService.login(email, password); // Ensure `authService` returns token
       set({ user, token, isAuthenticated: true, loading: false });
       
-      localStorage.setItem("user", JSON.stringify(user)); // Store user in localStorage
-      localStorage.setItem("token", token); // Store JWT token
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user", JSON.stringify(user)); // Store user in localStorage
+        localStorage.setItem("token", token); // Store JWT token
+      }
 
       toast.success("Login successful!");
     } catch (error: unknown) {
@@ -69,8 +86,10 @@ const useAuthStore = create<AuthState>((set) => ({
 
   logout: () => {
     authService.logout();
-    localStorage.removeItem("user"); // Remove user from localStorage
-    localStorage.removeItem("token");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("user"); // Remove user from localStorage
+      localStorage.removeItem("token");
+    }
     set({ user: null, token: null, isAuthenticated: false });
     toast.success("Logged out successfully!");
   },
