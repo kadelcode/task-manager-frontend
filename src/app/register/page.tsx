@@ -128,7 +128,7 @@ export default function RegisterPage() {
                             placeholder="Name"
                             {...register("name")}
                             style={{ border: `${errors.name ? '1px solid red' : '1px solid black'}`}}
-                            className="border p-2 w-full mt-4 rounded-md #2b7fff"
+                            className="border p-2 w-full mt-4 rounded-md focus:outline-0"
                             />
                             {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                         </div>
