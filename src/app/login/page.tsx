@@ -82,6 +82,7 @@ export default function LoginPage() {
                     <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Password"
+                    style={{ border: '1px solid black'}}
                     {...register("password")} // Register the password input field
                     className={`bg-white focus:outline-0 focus:border-[#05df72] border-2 border-[#99a1af] rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.password ? "focus:outline-0 border-red-500 focus:border-red-500": ""}`}
                     />
