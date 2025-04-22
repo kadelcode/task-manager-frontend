@@ -11,7 +11,7 @@ interface ProtectedComponentProps {
 }
 
 const withAuth = (WrappedComponent: React.FC<ProtectedComponentProps>) => {
-  return function ProtectedComponent(props: any) {
+  return function ProtectedComponent(props: ProtectedComponentProps) {
     const { isAuthenticated } = useAuth();
     const router = useRouter();
 

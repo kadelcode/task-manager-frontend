@@ -20,7 +20,7 @@ export default function Navbar() {
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
         setIsLoading(true);
-        const form = event.target as HTMLFormElement;
+        //const form = event.target as HTMLFormElement;
         /*const formData = {
             title: (form.elements.namedItem('title') as HTMLInputElement).value,
             description: (form.elements.namedItem('description') as HTMLTextAreaElement).value,
