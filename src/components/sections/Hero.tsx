@@ -30,7 +30,7 @@ export function Hero() {
             </motion.p>
 
 
-            <Button className="bg-green-400 flex items-center text-[#fff] px-6 py-3 text-lg rounded-md shadow-md">
+            <Button className="bg-[#05df72] flex items-center text-[#fff] px-6 py-3 text-lg rounded-md shadow-md">
                 Get Started <ArrowRight className="ml-2" />
             </Button>
         </section>
