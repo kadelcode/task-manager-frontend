@@ -66,7 +66,9 @@ export default function LoginPage() {
         ) : (
             <div className="w-96 mx-auto p-5 border rounded">
             <h2 className="text-xl font-bold">Login To Your Account</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form 
+              style={{ boxShadow: '0 4px 6px -4px rgba(0, 0, 0, 0.1)' }}
+              onSubmit={handleSubmit(onSubmit)}>
                 <div>
                     <input
                     type="email"
