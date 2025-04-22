@@ -78,7 +78,7 @@ export default function Testimonials() {
                 See how our app has improved productivity
             </motion.p>
             
-            <Carousel className="w-96 md:w-xl lg:w-2xl mx-auto mt-8 z-10">
+            <Carousel className="w-[320px] sm:w-[346px] md:w-xl lg:w-2xl mx-auto mt-8 z-10">
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
                         <CarouselItem key={index} className="p-4">
