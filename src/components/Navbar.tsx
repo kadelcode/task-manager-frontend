@@ -5,10 +5,10 @@ import { Bell, Plus, UserCircle, X, Loader2 } from "lucide-react";
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
+//import axios from "axios";
 import useAuthStore from "@/store/authStore";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+//const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function Navbar() {
     // const [search, setSearch] = useState("");
@@ -21,12 +21,12 @@ export default function Navbar() {
         event.preventDefault();
         setIsLoading(true);
         const form = event.target as HTMLFormElement;
-        const formData = {
+        /*const formData = {
             title: (form.elements.namedItem('title') as HTMLInputElement).value,
             description: (form.elements.namedItem('description') as HTMLTextAreaElement).value,
             priority: (form.elements.namedItem('priority') as HTMLSelectElement).value,
             dueDate: (form.elements.namedItem('dueDate') as HTMLInputElement).value,
-        };
+        };*/
 
         try {
             // const response = await axios.post(API_URL + "/tasks", formData);

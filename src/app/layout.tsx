@@ -5,7 +5,7 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 
 import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+//import { usePathname } from "next/navigation";
 import { useNavigationStore } from "@/store/useNavigationStore";
 
 const geistSans = Geist({

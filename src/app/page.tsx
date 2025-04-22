@@ -2,7 +2,7 @@
 
 import Header from "@/components/Header";
 import { Hero } from "@/components/sections/Hero";
-import { metadata } from "./metadata"; // Import the metadata separately
+//import { metadata } from "./metadata"; // Import the metadata separately
 import Features from "@/components/sections/Features";
 import Integrations from "@/components/sections/Integrations";
 import Testimonials from "@/components/sections/Testimonials"
