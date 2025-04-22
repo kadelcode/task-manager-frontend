@@ -74,7 +74,7 @@ export default function LoginPage() {
                     <input
                     type="email"
                     placeholder="Email"
-                    style={{ border: `${errors.password ? '1px solid red' : '1px solid black'}`}}
+                    style={{ border: `${errors.email ? '1px solid red' : '1px solid black'}`}}
                     {...register("email")} // Register the email input field
                     className={`bg-white focus:outline-0 focus:border-[#05df72] border border-[#99a1af] rounded-md p-2 w-full mt-5 transition-colors 0.3 ${errors.email ? " border-[#fb2c36] focus:outline-0 focus:border-[#fb2c36]" : ""}`}
                     />

@@ -128,7 +128,7 @@ export default function RegisterPage() {
                             placeholder="Name"
                             {...register("name")}
                             style={{ border: `${errors.name ? '1px solid red' : '1px solid black'}`}}
-                            className="border p-2 w-full mt-4 rounded-md"
+                            className="border p-2 w-full mt-4 rounded-md #2b7fff"
                             />
                             {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
                         </div>
@@ -139,7 +139,7 @@ export default function RegisterPage() {
                             placeholder="Email"
                             {...register("email")}
                             style={{ border: `${errors.email ? '1px solid red' : '1px solid black'}`}}
-                            className="border p-2 w-full mt-3 rounded-md"
+                            className="border focus:outline-0 p-2 w-full mt-3 rounded-md"
                             />
                             {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                         </div>
@@ -150,7 +150,7 @@ export default function RegisterPage() {
                             placeholder="Password"
                             {...register("password")}
                             style={{ border: `${errors.password ? '1px solid red' : '1px solid black'}`}}
-                            className="border p-2 w-full mt-3 rounded-md"
+                            className="border focus:outline-0 p-2 w-full mt-3 rounded-md"
                             />
                             <button
                             type="button"
@@ -188,7 +188,7 @@ export default function RegisterPage() {
                             placeholder="Confirm Password"
                             {...register("confirmPassword")}
                             style={{ border: `${errors.confirmPassword ? '1px solid red' : '1px solid black'}`}}
-                            className="border p-2 w-full mt-3 rounded-md"
+                            className="border p-2 w-full mt-3 rounded-md focus:outline-0"
                             />
                             <button
                             type="button"
@@ -217,7 +217,7 @@ export default function RegisterPage() {
 
                     {/* Link to Login */}
                     <div className="text-center mt-5">
-                        <span>Already have an account? <Link className="text-blue-500 hover:underline" href="/login">Login</Link></span>
+                        <span>Already have an account? <Link className="text-[#2b7fff] hover:underline" href="/login">Login</Link></span>
                     </div>
                 </div>
             )}
