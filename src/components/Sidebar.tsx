@@ -36,7 +36,7 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside
-              className={`fixed md:static h-screen w-65 bg-gray-900 text-white p-4 flex flex-col transform transition-transform z-40
+              className={`fixed md:fixed h-screen w-65 bg-gray-900 text-white p-4 flex flex-col transform transition-transform z-40
               ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
             >
                 <h2 className="text-xl font-bold mb-6 ml-10 md:ml-0">Task Manager</h2>

@@ -35,7 +35,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             <Sidebar />
             
             {/* Main Content (Takes Remaining Space) */}
-            <main className="w-full md:flex-1">
+            <main className="w-full md:flex-1 md:ml-64">
                 <Navbar />
                 {children}
             </main>
