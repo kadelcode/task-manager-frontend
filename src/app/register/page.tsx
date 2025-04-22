@@ -116,7 +116,9 @@ export default function RegisterPage() {
             { loading ? (
                 <RegisterSkeleton />
             ) : (
-                <div className="w-96 px-6 mx-auto p-5 border rounded">
+                <div
+                  style={{ boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', border: '1px solid black' }} 
+                  className="w-96 px-6 mx-auto p-5 border rounded">
                     <h2 className="text-xl font-bold">Register</h2>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
@@ -125,6 +127,7 @@ export default function RegisterPage() {
                             type="text"
                             placeholder="Name"
                             {...register("name")}
+                            style={{ border: `${errors.name ? '1px solid red' : '1px solid black'}`}}
                             className="border p-2 w-full mt-4 rounded-md"
                             />
                             {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
@@ -135,6 +138,7 @@ export default function RegisterPage() {
                             type="email"
                             placeholder="Email"
                             {...register("email")}
+                            style={{ border: `${errors.email ? '1px solid red' : '1px solid black'}`}}
                             className="border p-2 w-full mt-3 rounded-md"
                             />
                             {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
@@ -145,6 +149,7 @@ export default function RegisterPage() {
                             type={ showPassword ? "text" : "password" }
                             placeholder="Password"
                             {...register("password")}
+                            style={{ border: `${errors.password ? '1px solid red' : '1px solid black'}`}}
                             className="border p-2 w-full mt-3 rounded-md"
                             />
                             <button
@@ -182,6 +187,7 @@ export default function RegisterPage() {
                             type={ showConfirmPassword ? "text" : "password" }
                             placeholder="Confirm Password"
                             {...register("confirmPassword")}
+                            style={{ border: `${errors.confirmPassword ? '1px solid red' : '1px solid black'}`}}
                             className="border p-2 w-full mt-3 rounded-md"
                             />
                             <button
@@ -195,7 +201,7 @@ export default function RegisterPage() {
                         </div>
 
                         <button type="submit"
-                        className={`bg-green-400 hover:bg-green-500 text-white px-4 py-2 w-full mt-5 rounded-md ${
+                        className={`bg-[#05df72] hover:bg-[#00c951] text-[#fff] px-4 py-2 w-full mt-5 rounded-md ${
                             isSubmitting ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
                         }`}
                         disabled={isSubmitting}
