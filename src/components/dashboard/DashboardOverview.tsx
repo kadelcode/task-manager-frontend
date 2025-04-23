@@ -27,10 +27,10 @@ export default function DashboardOverview() {
         <section className="p-3 md:p-6">
             <div className="grid gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
                 {stats.map((stat) => (
-                    <Card key={stat.title}>
+                    <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }} key={stat.title}>
                         <CardContent className="p-4">
-                            <p className="text-sm text-gray-600">{stat.title}</p>
-                            <h2 className="text-2xl font-bold">{stat.value}</h2>
+                            <p className="text-sm text-[#4a5565]">{stat.title}</p>
+                            <h2 className="text-2xl font-bold text-[#000]">{stat.value}</h2>
                         </CardContent>
                     </Card>
                 ))}
@@ -54,7 +54,7 @@ export default function DashboardOverview() {
                 <Card className="mb-4">
                     <CardContent className="p-4">
                         <h3 className="text-lg font-semibold mb-4">Upcoming Deadlines</h3>
-                        <ul className="space-y-2">
+                        <ul className="space-y-2 text-[#000]">
                             <li>📌 Design Review Meeting - Today</li>
                             <li>📌 Finish Feature X - Tomorrow</li>
                             <li>📌 Client Feedback - In 3 days</li>
