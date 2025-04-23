@@ -38,6 +38,7 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside
+              style={{ transform: isOpen ? "translateX(0)" : "translateX(-100%)", }}
               className={`fixed md:fixed h-screen w-65 bg-[#e5e7eb] text-white p-4 flex flex-col transform transition-transform z-40
               ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
                 <h2 className="text-xl text-[#05df72] font-bold  mb-6 ml-10 md:ml-0">TaskSpark</h2>
