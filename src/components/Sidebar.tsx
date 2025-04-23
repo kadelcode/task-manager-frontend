@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils"; // Utility for conditional class names
 import { useState } from "react";
 import useAuthStore from "@/store/authStore";
+import { useMediaQuery } from 'react-responsive';
 
 const sidebarLinks = [
     { name: "Overview", href: "/dashboard", icon: Home },
@@ -18,7 +19,11 @@ const sidebarLinks = [
 const Sidebar = () => {
     const pathname = usePathname(); // Get current route;
     const [isOpen, setIsOpen] = useState(false);
-    const { logout } = useAuthStore();  
+    const { logout } = useAuthStore();
+    
+    const isMediumScreen = useMediaQuery({ query: '(min-width: 768px)' });
+
+    const translateValue = isOpen || isMediumScreen ? 'translateX(0)' : 'translateX(-100)';
 
 
     return (
@@ -38,7 +43,7 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside
-              style={{ transform: isOpen ? "translateX(0)" : "translateX(-100%)", }}
+              style={{ transform: translateValue }}
               className={`fixed md:fixed h-screen w-65 bg-[#e5e7eb] text-white p-4 flex flex-col transform transition-transform z-40
               ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
                 <h2 className="text-xl text-[#05df72] font-bold  mb-6 ml-10 md:ml-0">TaskSpark</h2>
