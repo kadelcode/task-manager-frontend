@@ -7,8 +7,8 @@ interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   loading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string) => Promise<void>; // ✅ Added register
+  login: (email: string, password: string) => Promise<boolean>;
+  register: (name: string, email: string, password: string) => Promise<boolean>; // ✅ Added register
   logout: () => void;
 }
 
@@ -43,8 +43,8 @@ const useAuthStore = create<AuthState>((set) => ({
         localStorage.setItem("user", JSON.stringify(user)); // Store user in localStorage
         localStorage.setItem("token", token); // Store JWT token
       }
-
       toast.success("Login successful!");
+      return true; // Success
     } catch (error: unknown) {
       // Initialize a default error message
       let errorMessage = "Something went wrong.";
@@ -63,6 +63,7 @@ const useAuthStore = create<AuthState>((set) => ({
 
       // Display the error message using a toast nofication
       toast.error(errorMessage);
+      return false; // Failure
     }
   },
 
@@ -72,6 +73,7 @@ const useAuthStore = create<AuthState>((set) => ({
       await authService.register(name, email, password);
       set({ loading: false });
       toast.success("Registration successful! Please login.");
+      return true;
     } catch (error: unknown) {
       let errorMessage = "Something went wrong.";
 
@@ -81,6 +83,7 @@ const useAuthStore = create<AuthState>((set) => ({
       }
       set({ loading: false });
       toast.error(errorMessage);
+      return false;
     }
   },
 
