@@ -37,7 +37,7 @@ export default function DashboardOverview() {
             </div>
 
             <div className="md:col-span-2 lg:col-span-4">
-                <Card className="mb-4">
+                <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }} className="mb-4">
                     <CardContent className="p-4">
                         <h3 className="text-lg font-semibold mb-4">Weekly Task Completion</h3>
                         <ResponsiveContainer width="100%" height={200}>
@@ -51,7 +51,7 @@ export default function DashboardOverview() {
                     </CardContent>
                 </Card>
 
-                <Card className="mb-4">
+                <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }} className="mb-4">
                     <CardContent className="p-4">
                         <h3 className="text-lg font-semibold mb-4">Upcoming Deadlines</h3>
                         <ul className="space-y-2 text-[#000]">
@@ -62,7 +62,7 @@ export default function DashboardOverview() {
                     </CardContent>                
                 </Card>
 
-                <Card className="mb-4">
+                <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }} className="mb-4">
                     <CardContent className="p-4">
                         <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
                         <div className="flex gap-2 flex-wrap">
