@@ -42,9 +42,9 @@ export default function Navbar() {
 
     return (
         <>
-        <nav className="top-0 w-full bg-gray-400 shadow-md h-16 px-4 flex items-center justify-between z-40">
+        <nav className="top-0 w-full bg-gray-100 shadow-md h-16 px-4 flex items-center justify-between z-40">
             {/* Logo */}
-            <h2 className="text-xl font-bold ml-10 md:hidden">Task Manager</h2>
+            <h2 className="text-xl text-[#05df72] font-bold ml-10 md:hidden">TaskSpark</h2>
 
             {/* Search Bar */}
             {/*<div className="relative flex-1 max-w-md">
@@ -63,7 +63,7 @@ export default function Navbar() {
                 {/* Add Task Button */}
                 <button
                   onClick={() => setIsModalOpen(true)}
-                  className="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 cursor-pointer"
+                  className="p-2 rounded-full bg-[#05df72] text-white hover:bg-[#7bf1a8] cursor-pointer"
                 >
                     <Plus className="w-4 h-4" />
                 </button>
