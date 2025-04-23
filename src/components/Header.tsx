@@ -25,8 +25,8 @@ export default function Header() {
                     <Link href="#testimonials" className="hover:text-green-500">Testimonials</Link>
                     <Link href="#faq" className="hover:text-green-500">FAQ</Link>
                 </div>
-                <Link href="/dashboard">
-                 <Button className="hidden md:block text-white">Get Started</Button>
+                <Link href="/register">
+                 <Button className="hidden md:block text-white cursor-pointer">Get Started</Button>
                 </Link>
                 <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -48,7 +48,7 @@ export default function Header() {
                         <Link href="#testimonials" className="hover:text-[#05df72]" onClick={() => setIsOpen(false)}>Testimonials</Link>
                         <Link href="#faq" className="hover:text-[#05df72]" onClick={() => setIsOpen(false)}>FAQ</Link>
                         
-                        <Link href="/dashboard">
+                        <Link href="/register">
                             <Button className="bg-[#05df72] hover:bg-green-500 text-white cursor-pointer">Get Started</Button>
                         </Link>
                     </div>
