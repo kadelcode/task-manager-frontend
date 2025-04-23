@@ -76,9 +76,11 @@ export default function RegisterPage() {
 
     const onSubmit: SubmitHandler<RegisterFormInputs> = async (data) => {
         try {
-            await registerUser(data.name, data.email, data.password);
+            const success = await registerUser(data.name, data.email, data.password);
             // login(data.email, data.password); // Call the login function with email and password
-            router.push("/login");
+            if (success) {
+                router.push("/login");
+            }
         } catch (error) {
             console.error("Registration failed", error);
         }

@@ -43,7 +43,10 @@ export default function LoginPage() {
 
   // Define the onSubmit function for form submission
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-    await login(data.email, data.password); // Call the login function with email and password
+    const success = await login(data.email, data.password); // Call the login function with email and password
+    if (success) {
+      router.push("/dashboard"); // Only redirect on success
+    }
     //router.push("/dashboard"); // Navigate to the dashboard page after successful login
   };
 
