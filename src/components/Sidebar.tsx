@@ -21,9 +21,26 @@ const Sidebar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { logout } = useAuthStore();
     
-    const isMediumScreen = useMediaQuery({ query: '(min-width: 768px)' });
+    const isMediumScreen = useMediaQuery({ minWidth: 768 });
+    // const isSmallScreen = useMediaQuery({ maxWidth: 768 });
 
-    const translateValue = isOpen || isMediumScreen ? 'translateX(0)' : 'translateX(-100)';
+    const getTranslateX = () => {
+        if (isMediumScreen) {
+            return "0%"; // always visible on md+
+        }
+
+        /*if (isSmallScreen) {
+            return "-100%";
+        }*/
+
+        return isOpen ? "0%" : "-100%" // slide in/out on small screens
+     }
+
+    // const translateValue = `transform: ${isOpen} ? 'translateX(0)' : 'translateX(-100%)'`;
+
+    // const translateValue = isOpen  ? 'translateX(0)' : 'translateX(-100)';
+
+    // ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0
 
 
     return (
@@ -43,9 +60,9 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <aside
-              style={{ transform: translateValue }}
-              className={`fixed md:fixed h-screen w-65 bg-[#e5e7eb] text-white p-4 flex flex-col transform transition-transform z-40
-              ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}>
+              style={{ transform: `translateX(${getTranslateX()})`, transition: "transform 0.3s ease" }}
+              className={`fixed md:fixed h-screen w-65 bg-[#e5e7eb] text-white p-4 flex flex-col z-40 transition-transform
+              `}>
                 <h2 className="text-xl text-[#05df72] font-bold  mb-6 ml-10 md:ml-0">TaskSpark</h2>
                 <nav className="flex flex-col space-y-4">
                     {sidebarLinks.map(({ name, href, icon: Icon }) => (
