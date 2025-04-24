@@ -5,11 +5,11 @@ import { Bell, Plus, UserCircle, X, Loader2 } from "lucide-react";
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
+// import axios from "axios";
 import useAuthStore from "@/store/authStore";
 import useTaskStore from "@/store/taskStore";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+// const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 
 
@@ -32,7 +32,7 @@ export default function Navbar() {
             description: (form.elements.namedItem('description') as HTMLTextAreaElement).value,
             priority: (form.elements.namedItem("priority") as HTMLSelectElement).value as "low" | "medium" | "high",
             dueDate: (form.elements.namedItem('dueDate') as HTMLInputElement).value,
-            status: "todo" as "todo", // cast it to literal type
+            status: "todo" as const, // as const makes the whole object or value readonly and keeps its literal types intact
             assignedTo: user?.id || "", 
         };
 
