@@ -1,11 +1,16 @@
-"use client"
+"use client";
 
-import TaskListDndProvider from "@/components/TaskList"
+import useTaskStore from "@/store/taskStore";
 
-export default function TaskPage() {
+
+export default function TasksListPage() {
+    const { tasks } = useTaskStore();
+
     return (
-        <div className="p-6">
-            <TaskListDndProvider />
-        </div>
-    )
+        <ul>
+          {tasks.map(task => (
+            <li key={task.id}>{task.title}</li>
+          ))}
+        </ul>
+    );
 }
