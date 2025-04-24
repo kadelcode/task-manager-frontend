@@ -1,14 +1,17 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { Bell, Plus, UserCircle, X, Loader2 } from "lucide-react";
 import { Dialog } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { ToastContainer, toast } from "react-toastify";
-//import axios from "axios";
+import axios from "axios";
 import useAuthStore from "@/store/authStore";
+import useTaskStore from "@/store/taskStore";
 
-//const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+
 
 export default function Navbar() {
     // const [search, setSearch] = useState("");
@@ -17,21 +20,26 @@ export default function Navbar() {
 
     const { user, isAuthenticated } = useAuthStore();
 
+    const { addTask } = useTaskStore();
+
     const handleSubmit = async (event: FormEvent) => {
         event.preventDefault();
         setIsLoading(true);
-        //const form = event.target as HTMLFormElement;
-        /*const formData = {
+
+        const form = event.target as HTMLFormElement;
+        const formData = {
             title: (form.elements.namedItem('title') as HTMLInputElement).value,
             description: (form.elements.namedItem('description') as HTMLTextAreaElement).value,
-            priority: (form.elements.namedItem('priority') as HTMLSelectElement).value,
+            priority: (form.elements.namedItem("priority") as HTMLSelectElement).value as "low" | "medium" | "high",
             dueDate: (form.elements.namedItem('dueDate') as HTMLInputElement).value,
-        };*/
+            status: "todo" as "todo", // cast it to literal type
+            assignedTo: user?.id || "", 
+        };
 
         try {
-            // const response = await axios.post(API_URL + "/tasks", formData);
-            toast.success('Task added successfully!');
+            await addTask(formData); // triggers global state update + toast
             setIsModalOpen(false);
+            form.reset(); // reset form after success
         } catch (error) {
             console.log(error)
             toast.error('Error adding task. Please try again.');

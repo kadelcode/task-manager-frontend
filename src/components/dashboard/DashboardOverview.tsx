@@ -5,8 +5,9 @@ import { Card, CardContent } from "@/components/ui/card";
 //import { Progress } from "@/components/ui/progress";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
+// import axios from "axios";
 import { Loader2 } from "lucide-react";
+import useTaskStore from "@/store/taskStore";
 
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -37,39 +38,14 @@ const data = [
 ];
 
 export default function DashboardOverview() {
-    const [tasks, setTasks] = useState<Task[]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    //const [tasks, setTasks] = useState<Task[]>([]);
+    const { tasks, fetchTasks, loading, error } = useTaskStore();
+    //const [loading, setLoading] = useState<boolean>(true);
+    //const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const fetchTasks = async () => {
-            try {
-                setLoading(true);
-
-                const token = localStorage.getItem("token");
-
-                const response = await axios.get<Task[]>(
-                    `${apiURL}/tasks`,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`,
-                        }
-                    }
-                );
-                setTasks(response.data);
-                setError(null);
-            } catch (err: unknown) {
-                if (axios.isAxiosError(err)) {
-                    setError(err.response?.data?.error || "An error occurred while fetching tasks.");
-                } else {
-                    setError("An unexpected error occurred.");
-                } 
-            } finally {
-                setLoading(false);
-            }   
-        };
         fetchTasks();
-    }, []);
+    }, [fetchTasks]);
 
     const total = tasks.length;
     const completed = tasks.filter(t => t.status === "done").length;
