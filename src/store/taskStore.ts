@@ -9,7 +9,7 @@ interface Toast {
 }
 
 interface SetState {
-    (update: { loading: boolean }): void;
+    (update: Partial<Pick<TaskState, "loading" | "error">>): void;
 }
 
 // Define a reusable function to handle errors with proper types
@@ -22,12 +22,13 @@ function handleError(error: unknown, toast: Toast, set: SetState) {
     }
 
     toast.error(errorMessage);
-    set({ loading: false });
+    set({ loading: false, error: errorMessage });
 }
 
 interface TaskState {
     tasks: Task[];
     loading: boolean;
+    error: string | null;
     fetchTasks: () => Promise<void>
     addTask: (task: Omit<Task, "id">) => Promise<void>;
     updateTask: (taskId: string, task: Partial<Task>) => Promise<void>;
@@ -37,9 +38,10 @@ interface TaskState {
 const useTaskStore = create<TaskState>((set) => ({
     tasks: [],
     loading: false,
+    error: null,
 
     fetchTasks: async () => {
-        set({ loading: true });
+        set({ loading: true, error: null });
         try {
             const tasks = await taskService.getTasks();
             set({ tasks, loading: false });
@@ -51,7 +53,7 @@ const useTaskStore = create<TaskState>((set) => ({
     addTask: async (task) => {
         try {
             const newTask = await taskService.createTask(task);
-            set((state) => ({ tasks: [...state.tasks, newTask] }));
+            set((state) => ({ tasks: [...state.tasks, newTask], error: null }));
             toast.success("Task added successfully!");
         } catch (error) {
             handleError(error, toast, set);
@@ -63,6 +65,7 @@ const useTaskStore = create<TaskState>((set) => ({
             const updatedTask = await taskService.updateTask(taskId, task);
             set((state) => ({
                 tasks: state.tasks.map((t) => (t.id === taskId ? updatedTask: t)),
+                error: null,
             }));
             toast.success("Task updated successfully");
         } catch (error) {
@@ -75,6 +78,7 @@ const useTaskStore = create<TaskState>((set) => ({
             await taskService.deleteTask(taskId);
             set((state) => ({
                 tasks: state.tasks.filter((t) => t.id !== taskId),
+                error: null,
             }));
             toast.success("Task deleted successfully!");
         } catch (error) {
