@@ -3,9 +3,19 @@ import { Task } from "@/types/taskTypes";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api/tasks";
 
+// Helper function to attach the auth token to headers
+const getAuthHeaders = () => {
+    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    return {
+        headers: {
+            Authorization: token ? `Bearer ${token}` : "",
+        }
+    }
+}
+
 const taskService = {
     getTasks: async (): Promise<Task[]> => {
-        const response = await axios.get(API_URL);
+        const response = await axios.get(`${API_URL}/tasks/`, getAuthHeaders());
         return response.data;
     },
 
@@ -15,7 +25,7 @@ const taskService = {
     },
 
     createTask: async (taskData: Omit<Task, "id">): Promise<Task> => {
-        const response = await axios.post(`${API_URL}/tasks`, taskData);
+        const response = await axios.post(`${API_URL}/tasks`, taskData, getAuthHeaders());
         return response.data;
     },
 
