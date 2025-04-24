@@ -81,12 +81,12 @@ export default function DashboardOverview() {
             <div>
                 { loading && (
                         <div className="p-4 py-20 w-full flex justify-center items-center">
-                            <Loader2 className="animate-spin text-green-400" />
+                            <Loader2 className="animate-spin text-[#05df72]" />
                         </div>
                 )}
 
                 { error && (
-                        <div className="p-4 py-20 text-center text-red-600">Error: {error}</div>
+                        <div className="p-4 py-20 text-center text-[#e7000b]">Error: {error}</div>
                 )}
                 { !loading && !error && (
                     <div className="grid gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
