@@ -42,7 +42,10 @@ export default function Navbar() {
 
     return (
         <>
-        <nav className="top-0 w-full bg-gray-100 shadow-md h-16 px-4 flex items-center justify-between z-40">
+        <nav 
+          style={{  boxShadow: "0 2px 4px -2px rgb(0, 0, 0, 0.1)"}}
+          className="top-0 w-full bg-[#f3f4f6] shadow-md h-16 px-4 flex items-center justify-between z-40"
+        >
             {/* Logo */}
             <h2 className="text-xl text-[#05df72] font-bold ml-10 md:hidden">TaskSpark</h2>
 
