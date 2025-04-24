@@ -1,18 +1,32 @@
 "use client"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 //import { Progress } from "@/components/ui/progress";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { Loader2 } from "lucide-react";
+
+const apiURL = process.env.NEXT_PUBLIC_API_URL;
+
+// Define a type for a task
+type Task = {
+    _id: string;
+    title: string;
+    status: "todo" | "in-progress" | "done" | "overdue";
+    dueDate: string;
+    priority: string;
+    createdAt: string;
+}
 
 // import withAuth from "@/hoc/withAuth";
-const stats = [
+/*const stats = [
     { title: "Total Tasks", value: 120 },
     { title: "Completed", value: 78 },
     { title: "Pending", value: 34 },
     { title: "Overdue", value: 8 },
-];
+];*/
 
 const data = [
     { name: "Mon", tasks: 10 },
@@ -23,17 +37,65 @@ const data = [
 ];
 
 export default function DashboardOverview() {
+    const [tasks, setTasks] = useState<Task[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                setLoading(true);
+
+                const token = localStorage.getItem("token");
+
+                const response = await axios.get<Task[]>(
+                    `${apiURL}/tasks`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        }
+                    }
+                );
+                setTasks(response.data);
+                setError(null);
+            } catch (err: unknown) {
+                if (axios.isAxiosError(err)) {
+                    setError(err.response?.data?.error || "An error occurred while fetching tasks.");
+                } else {
+                    setError("An unexpected error occurred.");
+                } 
+            } finally {
+                setLoading(false);
+            }   
+        };
+        fetchTasks();
+    }, []);
+
+    const total = tasks.length;
+    const completed = tasks.filter(t => t.status === "done").length;
+    const pending = tasks.filter(t => t.status === "in-progress").length;
+    const overdue = tasks.filter(t => t.status === "overdue").length;
+
     return (
         <section className="p-3 md:p-6">
-            <div className="grid gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
-                {stats.map((stat) => (
-                    <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }} key={stat.title}>
-                        <CardContent className="p-4">
-                            <p className="text-sm text-[#4a5565]">{stat.title}</p>
-                            <h2 className="text-2xl font-bold text-[#000]">{stat.value}</h2>
-                        </CardContent>
-                    </Card>
-                ))}
+            <div>
+                { loading && (
+                        <div className="p-4 py-20 w-full flex justify-center items-center">
+                            <Loader2 className="animate-spin text-green-400" />
+                        </div>
+                )}
+
+                { error && (
+                        <div className="p-4 py-20 text-center text-red-600">Error: {error}</div>
+                )}
+                { !loading && !error && (
+                    <div className="grid gap-6 p-4 md:grid-cols-2 lg:grid-cols-4">
+                        <StatCard title="Total Tasks" value={total} />
+                        <StatCard title="Completed" value={completed} />
+                        <StatCard title="Pending" value={pending} />
+                        <StatCard title="Overdue" value={overdue} />
+                    </div>
+                )}
             </div>
 
             <div className="md:col-span-2 lg:col-span-4">
@@ -74,5 +136,21 @@ export default function DashboardOverview() {
                 </Card>
             </div>
         </section>
+    )
+}
+
+type StatCardProps = {
+    title: string;
+    value: number;
+}
+
+function StatCard({ title, value }: StatCardProps) {
+    return (
+        <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }}>
+            <CardContent className="p-4">
+                <p className="text-sm text-[#4a5565]">{title}</p>
+                <h2 className="text-2xl font-bold text-[#000]">{value}</h2>
+            </CardContent>
+        </Card>
     )
 }
