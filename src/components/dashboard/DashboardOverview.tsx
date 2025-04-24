@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 //import { Progress } from "@/components/ui/progress";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
@@ -9,17 +9,17 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import useTaskStore from "@/store/taskStore";
 
-const apiURL = process.env.NEXT_PUBLIC_API_URL;
+//const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
 // Define a type for a task
-type Task = {
+/*type Task = {
     _id: string;
     title: string;
     status: "todo" | "in-progress" | "done" | "overdue";
     dueDate: string;
     priority: string;
     createdAt: string;
-}
+}*/
 
 // import withAuth from "@/hoc/withAuth";
 /*const stats = [
