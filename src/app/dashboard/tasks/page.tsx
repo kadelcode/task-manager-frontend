@@ -31,13 +31,13 @@ export default function TasksListPage() {
               {[...tasks].reverse().map((task) => (
                 <li 
                   key={task.title}
-                  style={{ boxShadow: '0 2px 4px -2px, rgb(0, 0, 0, 0.1)'}}
+                  style={{ boxShadow: '0px 2px 4px 2px rgb(0, 0, 0, 0.1)'}}
                   className={`p-4 mt-4 rounded-2xl shadow-md transition-all flex flex-col sm:flex-row sm:justify-between sm:items-center ${
                     task.status === "done" ? "bg-[#dcfce7]" : "bg-[#fff]"
                   }`}
                 >
                   <div className="flex-1">
-                    <h2 className="text-lg font-medium text-[#1e2939]">{task.title}</h2>
+                    <h2 className="text-lg font-semibold text-[#1e2939]">{task.title}</h2>
                     <p className="text-[#4a5565] mt-1 text-justify">{task.description}</p>
                     {task.dueDate && (
                       <p className="text-sm text-[#6a7282] mt-1">
