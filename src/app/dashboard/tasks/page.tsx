@@ -29,7 +29,7 @@ export default function TasksListPage() {
           <div className="w-full mx-auto p-4">
             {tasks.length === 0 ? (
               <div className="text-center mt-10 space-y-4">
-                <p className="text-center text-gray-500 text-lg mt-10">
+                <p className="text-center text-[#6a7282] text-lg mt-10">
                   You have no tasks yet.
                 </p>
                 <Link 
