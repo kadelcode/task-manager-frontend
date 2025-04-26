@@ -99,6 +99,7 @@ const useTaskStore = create<TaskState>((set) => ({
             }));
             toast.success("Task updated successfully");
         } catch (error) {
+            handleError(error, toast, set);
             throw error; // Let your component catch it
             //handleError(error, toast, set)
         }

@@ -106,6 +106,13 @@ export default function TasksListPage() {
           priority: editingTask.priority,
           status: editingTask.status,
         })
+        /*console.log("Saving task with data:", {
+          title: editingTask.title,
+          description: editingTask.description,
+          dueDate: editingTask.dueDate,
+          priority: editingTask.priority,
+          status: editingTask.status,
+        });*/
         closeModal();
       } catch (error) {
         if (isErrorWithMessage(error)) {
@@ -250,7 +257,7 @@ export default function TasksListPage() {
                 <div 
                   style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)'}}
                   className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                  <div className="bg-[#fff] p-6 rounded-xl shadow-xl w-full max-w-md space-y-4">
+                  <div className="bg-[#fff] p-6 mx-3 rounded-xl shadow-xl w-full max-w-md space-y-4">
                     <h2 className="text-xl font-semibold">Edit Task</h2>
 
                     {/* Title */}
@@ -306,7 +313,7 @@ export default function TasksListPage() {
                         type="checkbox"
                         checked={editingTask.status==="done"}
                         onChange={(e) =>
-                          setEditingTask({ ...editingTask, status: e.target.checked ? "done" : "todo"})
+                          setEditingTask((prev) => prev ? { ...prev, status: e.target.checked ? "done" : "todo" } : prev)
                         }
                       />
                       <span>Completed</span>
