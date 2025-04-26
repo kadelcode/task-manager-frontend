@@ -3,9 +3,10 @@
 import useTaskStore from "@/store/taskStore";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import {Loader2, CheckCircle, Clock, Pencil, Trash2 } from "lucide-react";
+import {Loader2, CheckCircle, Clock, Pencil, Trash2, X, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import type { Task } from "@/types/taskTypes";
+import { motion, AnimatePresence } from "framer-motion";
 
 
 function isErrorWithMessage(error: unknown): error is { message: string } {
@@ -28,7 +29,55 @@ export default function TasksListPage() {
     const [isUpdating, setIsUpdating] = useState(false);
     const [updateError, setUpdateError] = useState<string | null>(null);
 
+    // Add state to confirm the deletion of a task
+    const [confirmingDeleteId, setConfirmingDeleteId] = useState<string | null>(null);
+
+    // Add a timer state to confirm deletion
+    const [confirmTimer, setConfirmTimer] = useState<NodeJS.Timeout | null>(null);
+
+    // Add a deleting task id state
+    const [deletingTaskId, setDeletingTaskId] = useState<string | null>(null);
+
+
     //const [hasFetched, setHasFetched] = useState(false);
+
+    // Update timer on delete icon click
+    const handleStartConfirmDelete = (taskId: string) => {
+      setConfirmingDeleteId(taskId);
+
+      // Clear any previous timer
+      if (confirmTimer) {
+        clearTimeout(confirmTimer);
+      }
+
+      // Start a new 5s timer
+      const timer = setTimeout(() => {
+        setConfirmingDeleteId(null);
+      }, 5000);
+
+      setConfirmTimer(timer);
+    }
+
+    // Update timer on Cancel or Confirm click
+    const handleCancelDelete = () => {
+      setConfirmingDeleteId(null);
+      if (confirmTimer) {
+        clearTimeout(confirmTimer);
+      }
+    };
+
+    const handleConfirmDelete = async (taskId: string) => {
+      try {
+        setDeletingTaskId(taskId);
+        await deleteTask(taskId); // await the Zustand action
+      } finally {
+        setDeletingTaskId(null);
+        setConfirmingDeleteId(null);
+      }
+      if (confirmTimer) {
+        clearTimeout(confirmTimer);
+      }
+    }
 
     const openEditModal = (task: Task) => {
       setEditingTask(task)
@@ -136,20 +185,53 @@ export default function TasksListPage() {
                       )}
 
                       {/* Edit button */}
-                      <button 
+                      <button
                         onClick={() => {openEditModal(task); console.log("Opening modal for tasks:", task)}}
                         className="text-gray-900 hover:bg-gray-300 p-2 rounded-3xl transition-colors"
                       >
                         <Pencil className="w-5 h-5"/>
                       </button>
 
-                      {/* Delete button */}
-                      <button 
-                        onClick={() => handleDelete(task.id)}
-                        className="text-gray-900 hover:bg-gray-300 p-2 rounded-3xl transition-colors"
-                      >
-                        <Trash2 className="w-5 h-5" />
-                      </button>
+                      <AnimatePresence mode="wait">
+                      {/* Delete confirmation */}
+                      {confirmingDeleteId === task.id ? (
+                        <motion.div
+                          key="confirming"
+                          initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                          animate={{ opacity: 1, scale: 1, x: 0 }}
+                          exit={{ opacity: 0, scale: 0.8, x: 20 }}
+                          transition={{ duration: 0.25, ease: "easeOut" }}
+                          className="flex items-center gap-2"
+                        
+                        >
+                          <button
+                            onClick={handleCancelDelete}
+                            className="text-gray-900 hover:bg-gray-300 p-2 rounded-full transition"
+                          >
+                            <X className="h-5 w-5" />
+                          </button>
+                          <button
+                            onClick={() => handleConfirmDelete(task.id)}
+                            className="text-gray-900 hover:bg-gray-300 p-2 rounded-full transition"
+                          >
+                            {deletingTaskId === task.id ? (
+                              <Loader2 className="w-5 h-5 animate-spin" />
+                            ) : (
+                              <CheckCircle2 className="h-5 w-5" />
+                            )}
+                            
+                          </button>
+                        </motion.div>
+                        ) : (
+                          <button
+                            onClick={() => handleStartConfirmDelete(task.id)}
+                            className="text-gray-900 hover:bg-gray-300 p-2 rounded-3xl transition-colors"
+                          >
+                            <Trash2 className="w-5 h-5" />
+                          </button>
+                      )}
+                      </AnimatePresence>
+                      
                     </div>
 
                   </li>
