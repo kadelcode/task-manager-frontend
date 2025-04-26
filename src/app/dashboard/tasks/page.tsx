@@ -257,6 +257,7 @@ export default function TasksListPage() {
                       value={editingTask.title}
                       onChange={(e) => setEditingTask({ ...editingTask, title: e.target.value })}
                       className="w-full border rounded px-3 py-2"
+                      style={{ border: '1px black solid'}}
                       placeholder="Title"
                     />
 
@@ -265,6 +266,7 @@ export default function TasksListPage() {
                       value={editingTask.description}
                       onChange={(e) => setEditingTask({ ...editingTask, description: e.target.value })}
                       className="w-full border rounded px-3 py-2"
+                      style={{ border: '1px black solid'}}
                       placeholder="Description"
                     ></textarea>
 
@@ -276,6 +278,7 @@ export default function TasksListPage() {
                         setEditingTask({ ...editingTask, dueDate: e.target.value })
                       }
                       className="w-full border rounded px-3 py-2"
+                      style={{ border: '1px black solid'}}
                     />
 
                     {/* Priority */}
@@ -288,6 +291,7 @@ export default function TasksListPage() {
                         })
                       }
                       className="w-full border rounded px-3 py-2"
+                      style={{ border: '1px black solid'}}
                     >
                       <option value="low">Low Priority</option>
                       <option value="medium">Medium Priority</option>
@@ -308,7 +312,7 @@ export default function TasksListPage() {
 
                     {/* Error */}
                     {updateError && (
-                      <p className="text-sm text-red-500">{updateError}</p>
+                      <p className="text-sm text-[#fb2c36]">{updateError}</p>
                     )}
                     
 
@@ -316,7 +320,7 @@ export default function TasksListPage() {
                     <div className="flex justify-end gap-2">
                       <button
                         onClick={closeModal}
-                        className="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+                        className="px-4 py-2 rounded bg-[#e5e7eb] hover:bg-[#d1d5dc]"
                       >
                         Cancel
                       </button>
