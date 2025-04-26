@@ -186,6 +186,7 @@ export default function TasksListPage() {
 
                       {/* Edit button */}
                       <button
+                        title="Edit Task"
                         onClick={() => {openEditModal(task); console.log("Opening modal for tasks:", task)}}
                         className="text-gray-900 hover:bg-gray-300 p-2 rounded-3xl transition-colors"
                       >
@@ -205,12 +206,14 @@ export default function TasksListPage() {
                         
                         >
                           <button
+                            title="Cancel"
                             onClick={handleCancelDelete}
                             className="text-gray-900 hover:bg-gray-300 p-2 rounded-full transition"
                           >
                             <X className="h-5 w-5" />
                           </button>
                           <button
+                            title="Confirm Delete"
                             onClick={() => handleConfirmDelete(task.id)}
                             className="text-gray-900 hover:bg-gray-300 p-2 rounded-full transition"
                           >
@@ -224,6 +227,7 @@ export default function TasksListPage() {
                         </motion.div>
                         ) : (
                           <button
+                            title="Delete Task"
                             onClick={() => handleStartConfirmDelete(task.id)}
                             className="text-gray-900 hover:bg-gray-300 p-2 rounded-3xl transition-colors"
                           >
