@@ -8,6 +8,16 @@ import Link from "next/link";
 import type { Task } from "@/types/taskTypes";
 
 
+function isErrorWithMessage(error: unknown): error is { message: string } {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "message" in error &&
+    typeof (error as { message: unknown}).message === "string"
+  )
+}
+
+
 export default function TasksListPage() {
     const { tasks, fetchTasks, loading, error, deleteTask, updateTask } = useTaskStore();
 
@@ -49,13 +59,11 @@ export default function TasksListPage() {
         })
         closeModal();
       } catch (error) {
-        const message =
-          (typeof error == "object" &&
-            error !== null &&
-            "message" in error &&
-            (error as any).message) ||
-            "Failed to update task.";
-        setUpdateError(message as string);
+        if (isErrorWithMessage(error)) {
+          setUpdateError(error.message)
+        } else {
+          setUpdateError("Failed to update task.");
+        }
       } finally {
         setIsUpdating(false);
       }
