@@ -118,9 +118,9 @@ export default function TasksListPage() {
       }
     }
 
-    const handleDelete = (taskId: string) => {
+    /*const handleDelete = (taskId: string) => {
       deleteTask(taskId); // Zustand action
-    }
+    }*/
 
     /*useEffect(() => {
       if (!hasFetched) {
