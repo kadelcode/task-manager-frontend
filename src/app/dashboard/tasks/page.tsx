@@ -247,7 +247,9 @@ export default function TasksListPage() {
         )}
         {/*Edit Task Modal */}
         {isModelOpen && editingTask && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div 
+                  style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)'}}
+                  className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                   <div className="bg-[#fff] p-6 rounded-xl shadow-xl w-full max-w-md space-y-4">
                     <h2 className="text-xl font-semibold">Edit Task</h2>
 
@@ -327,7 +329,7 @@ export default function TasksListPage() {
                       <button
                         onClick={handleSave}
                         className={`px-4 py-2 rounded text-white transition 
-                          ${isUpdating ? "bg-gray-[#6a7282] cursor-not-allowed" : "bg-[#101828] hover:bg-[#1e2939]"}
+                          ${isUpdating ? "bg-gray-600 cursor-not-allowed" : "bg-[#101828] hover:bg-[#1e2939]"}
                         `}
                         disabled={isUpdating}
                       >
