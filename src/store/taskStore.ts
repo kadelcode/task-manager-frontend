@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import taskService from "@/services/taskService";
-import { Task } from "@/types/taskTypes";
+import { Task, TaskFromAPI } from "@/types/taskTypes";
 
 // Define the expected types for toast and set
 interface Toast {
@@ -43,8 +43,19 @@ const useTaskStore = create<TaskState>((set) => ({
     fetchTasks: async () => {
         set({ loading: true, error: null });
         try {
-            const tasks = await taskService.getTasks();
-            set({ tasks, loading: false });
+            const tasksFromAPI: TaskFromAPI[] = await taskService.getTasks();
+
+            const normalizedTasks = tasksFromAPI.map((task) => ({
+                //...task,
+                id: task._id,
+                title: task.title,
+                description: task.description,
+                priority: task.priority,
+                dueDate: task.dueDate,
+                status: task.status,
+                assignedTo: task.assignedTo,
+            }));
+            set({ tasks: normalizedTasks, loading: false });
         } catch (error) {
             handleError(error, toast, set)
         }
@@ -52,24 +63,44 @@ const useTaskStore = create<TaskState>((set) => ({
 
     addTask: async (task) => {
         try {
-            const newTask = await taskService.createTask(task);
-            set((state) => ({ tasks: [...state.tasks, newTask], error: null }));
+            const newTaskFromAPI = await taskService.createTask(task);
+            const normalizedTask: Task = {
+                ...newTaskFromAPI,
+                id: newTaskFromAPI._id,
+            }
+            set((state) => ({ tasks: [...state.tasks, normalizedTask], error: null }));
             toast.success("Task added successfully!");
         } catch (error) {
             handleError(error, toast, set);
         }
     },
 
-    updateTask: async (taskId, task) => {
+    updateTask: async (taskId: string, taskData: Partial<Task>) => {
         try {
-            const updatedTask = await taskService.updateTask(taskId, task);
+            const updatedTaskFromAPI = await taskService.updateTask(taskId, taskData);
+
+            console.log("✅ Updated Task returned from API:", updatedTaskFromAPI);
+
+            // Normalize _id to id
+            const normalizedTask: Task = {
+                //...updatedTaskFromAPI,
+                id: updatedTaskFromAPI._id,
+                title: updatedTaskFromAPI.title,
+                description: updatedTaskFromAPI.description,
+                priority: updatedTaskFromAPI.priority,
+                dueDate: updatedTaskFromAPI.dueDate,
+                status: updatedTaskFromAPI.status,
+                assignedTo: updatedTaskFromAPI.assignedTo,
+            };
+
             set((state) => ({
-                tasks: state.tasks.map((t) => (t.id === taskId ? updatedTask: t)),
+                tasks: state.tasks.map((t) => (t.id === taskId ? normalizedTask: t)),
                 error: null,
             }));
             toast.success("Task updated successfully");
         } catch (error) {
-            handleError(error, toast, set)
+            throw error; // Let your component catch it
+            //handleError(error, toast, set)
         }
     },
 
@@ -78,7 +109,7 @@ const useTaskStore = create<TaskState>((set) => ({
             await taskService.deleteTask(taskId);
             set((state) => ({
                 tasks: state.tasks.filter((t) => t.id !== taskId),
-                error: null,
+                //error: null,
             }));
             toast.success("Task deleted successfully!");
         } catch (error) {
