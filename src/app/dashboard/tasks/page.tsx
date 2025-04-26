@@ -236,7 +236,9 @@ export default function TasksListPage() {
                       </button>
                       <button
                         onClick={handleSave}
-                        className="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+                        className={`px-4 py-2 rounded text-white transition 
+                          ${isUpdating ? "bg-gray-[#6a7282] cursor-not-allowed" : "bg-[#101828] hover:bg-[#1e2939]"}
+                        `}
                         disabled={isUpdating}
                       >
                         { isUpdating ? "Saving..." : "Save"}
