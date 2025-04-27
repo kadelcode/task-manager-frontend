@@ -9,6 +9,7 @@ import Testimonials from "@/components/sections/Testimonials"
 import FAQ from "@/components/sections/FAQ";
 import CTA from "@/components/sections/CTA";
 import Support from "@/components/sections/Support";
+import Footer from "@/components/Footer";
 
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
       <FAQ />
       <CTA />
       <Support />
+      <Footer />
     </div>
 
   );
