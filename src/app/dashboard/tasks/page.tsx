@@ -198,12 +198,18 @@ export default function TasksListPage() {
                     </div>
                     <div className="flex items-center gap-3 mt-3 sm:mt-0 sm:ml-4">
                       {task.status === "done" ? (
-                        <CheckCircle className="text-[#00c951] w-6 h-6" />
+                        <div title="Completed">
+                          <CheckCircle className="text-[#00c951] w-6 h-6" />
+                        </div>
                       ) : isOverdue(task) ? (
-                        <AlarmMinusIcon className="text-red-500 w-6 h-6" />
+                        <div title="Overdue">
+                          <AlarmMinusIcon className="text-red-500 w-6 h-6" />
+                        </div>
                       ) :
                       (
-                        <Clock className="text-[#efb100] w-6 h-6" />
+                        <div title="Pending">
+                          <Clock className="text-[#efb100] w-6 h-6" />
+                        </div>
                       )}
 
                       {/* Edit button */}
