@@ -17,7 +17,7 @@ export default function Header() {
         <div>
             <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
                 <Link href="/" className="text-2xl font-bold text-green-400">
-                    TaskManager
+                    TaskSpark
                 </Link>
                 <div className="hidden md:flex space-x-6">
                     <Link href="#features" className="hover:text-green-500">Features</Link>

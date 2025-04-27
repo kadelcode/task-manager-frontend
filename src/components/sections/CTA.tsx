@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function CTA() {
     return (
@@ -7,11 +8,14 @@ export default function CTA() {
             <p className="mb-6">
                 Join thousands of users who manage tasks effortlessly
             </p>
+
+            <Link href="/dashboard">
             <Button
-              className="bg-[#05df72] px-6 py-7 text-lg rounded-md shadow-lg hover:bg-green-500 cursor-pointer"
+              className="bg-[#05df72] text-[#fff] px-6 py-7 text-lg rounded-md shadow-lg hover:bg-green-500 cursor-pointer"
             >
                 Try Taskify Free
             </Button>
+            </Link>
         </section>
     )
 }
