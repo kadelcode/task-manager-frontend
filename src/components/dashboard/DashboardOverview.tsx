@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import useTaskStore from "@/store/taskStore";
 
+import { isBefore, parseISO } from "date-fns";
+
 //const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
 // Define a type for a task
@@ -43,6 +45,21 @@ export default function DashboardOverview() {
     //const [loading, setLoading] = useState<boolean>(true);
     //const [error, setError] = useState<string | null>(null);
 
+    // Get today's date
+    const today = new Date();
+
+    // Calculate overdue tasks
+    const overdueTasks = tasks.filter((task) => {
+        // If task is not done AND dueDate is before today
+        return (
+            task.status !== "done" &&
+            task.dueDate && isBefore(new Date(task.dueDate), today)
+        );
+    })
+
+    // Total number of overdue tasks
+    const totalOverdue = overdueTasks.length;
+
     useEffect(() => {
         fetchTasks();
     }, [fetchTasks]);
@@ -50,7 +67,7 @@ export default function DashboardOverview() {
     const total = tasks.length;
     const completed = tasks.filter(t => t.status === "done").length;
     const pending = tasks.filter(t => t.status === "in-progress").length;
-    const overdue = tasks.filter(t => t.status === "overdue").length;
+    //const overdue = tasks.filter(t => t.status === "overdue").length;
 
     return (
         <section className="p-3 md:p-6">
@@ -69,7 +86,7 @@ export default function DashboardOverview() {
                         <StatCard title="Total Tasks" value={total} />
                         <StatCard title="Completed" value={completed} />
                         <StatCard title="Pending" value={pending} />
-                        <StatCard title="Overdue" value={overdue} />
+                        <StatCard title="Overdue" value={totalOverdue} />
                     </div>
                 )}
             </div>
