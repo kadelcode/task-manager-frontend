@@ -3,7 +3,7 @@
 import useTaskStore from "@/store/taskStore";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
-import {Loader2, CheckCircle, Clock, Pencil, Trash2, X, CheckCircle2 } from "lucide-react";
+import {Loader2, CheckCircle, Clock, Pencil, Trash2, X, CheckCircle2, AlarmMinusIcon } from "lucide-react";
 import Link from "next/link";
 import type { Task } from "@/types/taskTypes";
 import { motion, AnimatePresence } from "framer-motion";
@@ -40,6 +40,14 @@ export default function TasksListPage() {
 
 
     //const [hasFetched, setHasFetched] = useState(false);
+
+    // Checks if the task is overdue and not completed
+    const isOverdue = (task: Task) => {
+      if (!task.dueDate) return false;
+      const dueDate = new Date(task.dueDate);
+      const today = new Date();
+      return dueDate < today && task.status !== "done";
+    }
 
     // Update timer on delete icon click
     const handleStartConfirmDelete = (taskId: string) => {
@@ -172,7 +180,11 @@ export default function TasksListPage() {
                     key={task.id}
                     style={{ boxShadow: '0px 2px 4px 2px rgb(0, 0, 0, 0.1)'}}
                     className={`p-4 mt-4 rounded-2xl shadow-md transition-all flex flex-col sm:flex-row sm:justify-between sm:items-center ${
-                      task.status === "done" ? "bg-[#dcfce7]" : "bg-[#fff]"
+                      task.status === "done" 
+                      ? "bg-[#dcfce7]"
+                      : isOverdue(task)
+                      ? "bg-[#ffe4e6]"
+                      : "bg-[#fff]"
                     }`}
                   >
                     <div className="flex-1">
@@ -187,7 +199,10 @@ export default function TasksListPage() {
                     <div className="flex items-center gap-3 mt-3 sm:mt-0 sm:ml-4">
                       {task.status === "done" ? (
                         <CheckCircle className="text-[#00c951] w-6 h-6" />
-                      ) : (
+                      ) : isOverdue(task) ? (
+                        <AlarmMinusIcon className="text-red-500 w-6 h-6" />
+                      ) :
+                      (
                         <Clock className="text-[#efb100] w-6 h-6" />
                       )}
 
