@@ -34,6 +34,7 @@ export default function Navbar() {
             dueDate: (form.elements.namedItem('dueDate') as HTMLInputElement).value,
             status: "todo" as const, // as const makes the whole object or value readonly and keeps its literal types intact
             assignedTo: user?.id || "", 
+            createdAt: new Date().toISOString(),
         };
 
         try {

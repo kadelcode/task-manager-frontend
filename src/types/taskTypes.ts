@@ -8,6 +8,7 @@ export interface TaskFromAPI {
     priority: "low" | "medium" | "high"; // Priority level of the task
     dueDate: string; // Due date of the task
     assignedTo: string; // Person assigned to the task
+    createdAt: string; // Date which the task is created
 };
 
 // This interface extends from TaskFromAPI interface but omits the _id property

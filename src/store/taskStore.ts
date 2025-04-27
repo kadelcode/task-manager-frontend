@@ -54,6 +54,7 @@ const useTaskStore = create<TaskState>((set) => ({
                 dueDate: task.dueDate,
                 status: task.status,
                 assignedTo: task.assignedTo,
+                createdAt: task.createdAt,
             }));
             set({ tasks: normalizedTasks, loading: false });
         } catch (error) {
@@ -91,6 +92,7 @@ const useTaskStore = create<TaskState>((set) => ({
                 dueDate: updatedTaskFromAPI.dueDate,
                 status: updatedTaskFromAPI.status,
                 assignedTo: updatedTaskFromAPI.assignedTo,
+                createdAt: updatedTaskFromAPI.createdAt
             };
 
             set((state) => ({
