@@ -78,9 +78,18 @@ export default function DashboardOverview() {
         // Set the 'tasks' property to the count of tasks created on that day
         tasks: tasks.filter(task => {
             // Use the isSameDay function to check if the task was created on the same day as 'day.date'
-            return isSameDay(new Date(task.createdAt), day.date);
+            /* return isSameDay(new Date(task.createdAt), day.date);*/
+            
+            // Only consider tasks that are 'done' and completed on that day
+            return (
+                task.status === "done" &&
+                task.completedAt &&
+                isSameDay(new Date(task.completedAt), day.date)
+            )
         }).length, // Get the length of the filtered array, which is the count of tasks created on that day 
     }))
+
+    const noCompletedTasks = weeklyData.every(day => day.tasks === 0);
 
     // Calculate overdue tasks
     const overdueTasks = tasks.filter((task) => {
@@ -129,6 +138,11 @@ export default function DashboardOverview() {
                         <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }} className="mb-4">
                             <CardContent className="p-4">
                                 <h3 className="text-lg font-semibold mb-4">Weekly Task Completion</h3>
+                                {noCompletedTasks ? (
+                                    <div className="text-center text-gray-500 py-10">
+                                        No tasks completed this week.
+                                    </div>
+                                ) : (
                                 <ResponsiveContainer width="100%" height={200}>
                                     <BarChart data={weeklyData}>
                                         <XAxis dataKey="name" />
@@ -137,6 +151,7 @@ export default function DashboardOverview() {
                                         <Bar dataKey="tasks" fill="#4f46e5" />
                                     </BarChart>
                                 </ResponsiveContainer>
+                                )}
                             </CardContent>
                         </Card>
 
