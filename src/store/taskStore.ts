@@ -55,6 +55,7 @@ const useTaskStore = create<TaskState>((set) => ({
                 status: task.status,
                 assignedTo: task.assignedTo,
                 createdAt: task.createdAt,
+                completedAt: task.completedAt,
             }));
             set({ tasks: normalizedTasks, loading: false });
         } catch (error) {
@@ -92,7 +93,8 @@ const useTaskStore = create<TaskState>((set) => ({
                 dueDate: updatedTaskFromAPI.dueDate,
                 status: updatedTaskFromAPI.status,
                 assignedTo: updatedTaskFromAPI.assignedTo,
-                createdAt: updatedTaskFromAPI.createdAt
+                createdAt: updatedTaskFromAPI.createdAt,
+                completedAt: updatedTaskFromAPI.completedAt,
             };
 
             set((state) => ({
@@ -101,7 +103,7 @@ const useTaskStore = create<TaskState>((set) => ({
             }));
             toast.success("Task updated successfully");
         } catch (error) {
-            handleError(error, toast, set);
+            // handleError(error, toast, set);
             throw error; // Let your component catch it
             //handleError(error, toast, set)
         }

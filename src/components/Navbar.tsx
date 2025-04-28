@@ -35,6 +35,7 @@ export default function Navbar() {
             status: "todo" as const, // as const makes the whole object or value readonly and keeps its literal types intact
             assignedTo: user?.id || "", 
             createdAt: new Date().toISOString(),
+            completedAt: new Date().toISOString(),
         };
 
         try {
