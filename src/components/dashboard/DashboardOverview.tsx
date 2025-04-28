@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import useTaskStore from "@/store/taskStore";
 
-import { isBefore, subDays, format, isSameDay } from "date-fns";
+import { isBefore, subDays, format, isSameDay, formatDistanceToNow } from "date-fns";
 
 // Define a function to get an array of the past 7 days formatted as ["Mon", "Tue", ...]
 const getPastWeekDays = () => {
@@ -87,7 +87,23 @@ export default function DashboardOverview() {
                 isSameDay(new Date(task.completedAt), day.date)
             )
         }).length, // Get the length of the filtered array, which is the count of tasks created on that day 
-    }))
+    }));
+
+    // Filter, sort, and pick the top 5 upcoming tasks
+    const upcomingTasks = tasks
+      .filter(task =>
+        // Check if the task has a dueDate
+        task.dueDate &&
+        // Check if the task is not marked as "done"
+        task.status !== "done" &&
+        // Check if the dueDate is today or in the future
+        new Date(task.dueDate) >= today
+      )
+      .sort((a, b) =>
+        // Sort tasks by their dueDate in ascending order
+        new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+      )
+      .slice(0, 5); // Pick the top 5 tasks from the sorted list
 
     const noCompletedTasks = weeklyData.every(day => day.tasks === 0);
 
@@ -158,11 +174,17 @@ export default function DashboardOverview() {
                         <Card style={{ boxShadow: '0 2px 4px -2px rgb(0, 0, 0, 0.5)' }} className="mb-4">
                             <CardContent className="p-4">
                                 <h3 className="text-lg font-semibold mb-4">Upcoming Deadlines</h3>
-                                <ul className="space-y-2 text-[#000]">
-                                    <li>📌 Design Review Meeting - Today</li>
-                                    <li>📌 Finish Feature X - Tomorrow</li>
-                                    <li>📌 Client Feedback - In 3 days</li>
-                                </ul>
+                                {upcomingTasks.length === 0 ? (
+                                    <p className="text-sm text-gray-500">No upcoming deadlines</p>
+                                ) : (
+                                    <ul className="space-y-2 text-[#000]">
+                                        {upcomingTasks.map((task) => (
+                                            <li key={task.id}>
+                                                📌 {task.title} - {formatDistanceToNow(new Date(task.dueDate), { addSuffix: true })}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </CardContent>                
                         </Card>
 
