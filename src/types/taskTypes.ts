@@ -9,6 +9,7 @@ export interface TaskFromAPI {
     dueDate: string; // Due date of the task
     assignedTo: string; // Person assigned to the task
     createdAt: string; // Date which the task is created
+    completedAt: string | null; // Date which the task is completed
 };
 
 // This interface extends from TaskFromAPI interface but omits the _id property
