@@ -81,7 +81,7 @@ const Sidebar = () => {
                     ))}
                     <button 
                       onClick={logout} 
-                      className="bg-[#fb2c36] hover:bg-[#ff6467] cursor-pointer text-white px-4 py-2 rounded"
+                      className="bg-[#101828] hover:bg-[#1e2939] cursor-pointer text-white px-4 py-2 rounded"
                     >
                         Logout
                     </button>

@@ -192,9 +192,9 @@ export default function DashboardOverview() {
                             <CardContent className="p-4">
                                 <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
                                 <div className="flex gap-2 flex-wrap">
-                                    <Button>Add Task</Button>
-                                    <Button variant="outline">View Calendar</Button>
-                                    <Button variant="outline">Search Tasks</Button>
+                                    <Button className="bg-[#101828] hover:bg-[#1e2939] cursor-pointer text-white">Add Task</Button>
+                                    <Button variant="outline" className="bg-[#d1d5dc] cursor-pointer">View Calendar</Button>
+                                    <Button variant="outline" className="bg-[#d1d5dc] cursor-pointer">Search Tasks</Button>
                                 </div>
                             </CardContent>
                         </Card>
