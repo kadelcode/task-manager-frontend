@@ -72,7 +72,7 @@ export default function Navbar() {
             </div>*/}
 
             {/* Icons & Profile */}
-            <div className="flex items-center gap-4">
+            <div className="flex justify-between items-center gap-4">
                 {/* Add Task Button */}
                 <button
                   onClick={() => setIsModalOpen(true)}
@@ -101,7 +101,7 @@ export default function Navbar() {
         <Dialog open={isModelOpen} onClose={() => setIsModalOpen(false)}
           className="fixed inset-0 flex items-center justify-center z-50 px-6"
         >
-            <div className="bg-gray-200/25 fixed inset-0" />
+            <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} className="bg-[#101828]/50 fixed inset-0" />
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
