@@ -20,7 +20,7 @@ const taskService = {
     },
 
     getTaskById: async (taskId: string): Promise<TaskFromAPI> => {
-        const response = await axios.get(`${API_URL}/tasks/${taskId}`)
+        const response = await axios.get(`${API_URL}/tasks/${taskId}`, getAuthHeaders());
         return response.data;
     },
 
