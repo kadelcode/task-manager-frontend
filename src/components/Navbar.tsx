@@ -75,6 +75,7 @@ export default function Navbar() {
             <div className="flex justify-between items-center gap-4">
                 {/* Add Task Button */}
                 <button
+                  title="Add Task"
                   onClick={() => setIsModalOpen(true)}
                   className="p-2 rounded-full bg-[#05df72] text-white hover:bg-[#7bf1a8] cursor-pointer"
                 >
@@ -82,7 +83,23 @@ export default function Navbar() {
                 </button>
 
                 {/* Notification Icon */}
-                <button className="relative p-2 rounded-full hover:bg-gray-200">
+                <button className="relative md:hidden p-2 rounded-full hover:bg-gray-200">
+                    <Bell className="w-6 h-6 text-gray-700" />
+                    <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" />
+                </button>
+
+                {/* Profile Avatar */}
+                <button className="flex md:hidden items-center gap-2">
+                    <UserCircle className="w-6 h-6 text-gray-700" />
+                    {/*{ isAuthenticated && 
+                    <span className="hidden md:inline font-medium">{user?.email}</span>
+                    }*/}
+                </button>
+            </div>
+
+            <div className="hidden md:flex md:justify-between md:items-center md:gap-4">
+              {/* Notification Icon */}
+              <button className="relative p-2 rounded-full hover:bg-gray-200">
                     <Bell className="w-6 h-6 text-gray-700" />
                     <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" />
                 </button>
@@ -90,9 +107,9 @@ export default function Navbar() {
                 {/* Profile Avatar */}
                 <button className="flex items-center gap-2">
                     <UserCircle className="w-6 h-6 text-gray-700" />
-                    { isAuthenticated && 
+                    {/*{ isAuthenticated && 
                     <span className="hidden md:inline font-medium">{user?.email}</span>
-                    }
+                    }*/}
                 </button>
             </div>
         </nav>
@@ -141,7 +158,7 @@ export default function Navbar() {
                     </div>
 
                     {/* Submit Button */}
-                    <button type="submit" className="w-full bg-[#2b7fff] text-white py-2 rounded-md hover:bg-[#155dfc]">
+                    <button type="submit" className="w-full bg-[#101828] text-white py-2 rounded-md hover:bg-[#1e2939]">
                         { isLoading ?
                         <div className="flex justify-center items-center gap-2">
                             <Loader2 className="animate-spin" />
