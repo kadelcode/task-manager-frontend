@@ -18,7 +18,7 @@ export default function Navbar() {
     const [isModelOpen, setIsModalOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const { user, isAuthenticated } = useAuthStore();
+    const { user } = useAuthStore();
 
     const { addTask } = useTaskStore();
 
