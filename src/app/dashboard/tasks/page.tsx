@@ -203,7 +203,7 @@ export default function TasksListPage() {
                         </div>
                       ) : isOverdue(task) ? (
                         <div title="Overdue">
-                          <AlarmMinusIcon className="text-red-500 w-6 h-6" />
+                          <AlarmMinusIcon className="text-[#fb2c36] w-6 h-6" />
                         </div>
                       ) :
                       (
