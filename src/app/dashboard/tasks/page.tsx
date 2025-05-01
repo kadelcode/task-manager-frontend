@@ -205,10 +205,14 @@ export default function TasksListPage() {
                         <div title="Overdue">
                           <AlarmMinusIcon className="text-[#fb2c36] w-6 h-6" />
                         </div>
-                      ) :
-                      (
+                      ) : task.status === "in-progress" ? (
                         <div title="Pending">
                           <Clock className="text-[#efb100] w-6 h-6" />
+                        </div>
+                      ) :
+                      (
+                        <div title="todo">
+                          <Clock className="text-gray-600 w-6 h-6" />
                         </div>
                       )}
 
