@@ -67,7 +67,7 @@ const TaskList = () => {
 
     return (
         // Layout for the task colums
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {/* Map over the statuses to create a column for each */}
             {(["todo", "in-progress", "done"] as const).map((status) => (
                 // Render a TaskColumn for each status
@@ -100,7 +100,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({ status }) => {
 
     return (
         // Container for the task column with drop functionality
-        <div ref={drop as unknown as Ref<HTMLDivElement>} className="p-4 h-screen bg-[#e5e7eb] rounded-lg min-h-[200px]">
+        <div ref={drop as unknown as Ref<HTMLDivElement>} className="p-4 sm:p-6 h-[80vh] sm:h-screen w-full bg-[#e5e7eb] rounded-lg min-h-[200px]">
             <h3 className="font-bold">
                 {status === "todo" ? "To Do" : status === "in-progress" ? "In Progress" : "Completed"}
             </h3>
