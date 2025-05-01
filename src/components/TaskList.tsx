@@ -100,7 +100,7 @@ const TaskColumn: React.FC<TaskColumnProps> = ({ status }) => {
 
     return (
         // Container for the task column with drop functionality
-        <div ref={drop as unknown as Ref<HTMLDivElement>} className="p-4 h-screen bg-gray-200 rounded-lg min-h-[200px]">
+        <div ref={drop as unknown as Ref<HTMLDivElement>} className="p-4 h-screen bg-[#e5e7eb] rounded-lg min-h-[200px]">
             <h3 className="font-bold">
                 {status === "todo" ? "To Do" : status === "in-progress" ? "In Progress" : "Completed"}
             </h3>
@@ -124,7 +124,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
 
     return (
         // Task card with drag functionality and conditional styling
-        <Card ref={drag as unknown as Ref<HTMLDivElement>} className={`p-4 mt-2 bg-white ${isDragging ? "opacity-50" : ""}`}>
+        <Card ref={drag as unknown as Ref<HTMLDivElement>} className={`p-4 mt-2 bg-[#fff] ${isDragging ? "opacity-50" : ""}`}>
             {task.title}
         </Card>
     );
